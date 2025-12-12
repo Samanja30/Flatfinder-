@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Customer Dashboard - FlatFinders">
+  <title>My Account - FlatFinders</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c9a66b' rx='15' width='100' height='100'/><path fill='white' d='M50 20L20 45v35h25V55h10v25h25V45L50 20z'/></svg>">
+  <style>
+    .saved-property-card { display: flex; gap: 1rem; padding: 1rem; border: 1px solid var(--gray-200); border-radius: var(--radius-md); margin-bottom: 1rem; }
+    .saved-property-card:last-child { margin-bottom: 0; }
+    .saved-property-image { width: 120px; height: 90px; border-radius: var(--radius-sm); object-fit: cover; }
+    .saved-property-content { flex: 1; }
+    .saved-property-price { font-family: var(--font-primary); font-size: 1.25rem; font-weight: 700; color: var(--primary-gold); }
+    .saved-property-title { font-weight: 600; margin: 0.25rem 0; }
+    .saved-property-location { font-size: 0.85rem; color: var(--gray-600); display: flex; align-items: center; gap: 0.25rem; }
+    .saved-property-location svg { width: 14px; height: 14px; fill: var(--primary-gold); }
+    .saved-property-actions { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .inquiry-item { padding: 1rem; border-bottom: 1px solid var(--gray-200); }
+    .inquiry-item:last-child { border-bottom: none; }
+    .inquiry-status { display: inline-block; padding: 0.25rem 0.5rem; font-size: 0.75rem; border-radius: var(--radius-sm); }
+    .inquiry-status.sent { background: rgba(23, 162, 184, 0.1); color: var(--info); }
+    .inquiry-status.replied { background: rgba(40, 167, 69, 0.1); color: var(--success); }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="dashboard-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9.5L12 3L21 9.5V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9.5Z" fill="currentColor"/>
+            <path d="M9 22V12H15V22" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="logo-text">FlatFinders</span>
+      </div>
+      
+      <nav class="dashboard-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <a href="customer-dashboard.html" class="dashboard-nav-link active">
+            <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Dashboard
+          </a>
+          <a href="properties.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            Browse Properties
+          </a>
+          <a href="customer-dashboard.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            Saved Properties
+          </a>
+          <a href="customer-inquiries.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            My Inquiries
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Account</span>
+          <a href="customer-profile.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            My Profile
+          </a>
+          <a href="customer-settings.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Settings
+          </a>
+          <a href="index.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="dashboard-search">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" placeholder="Search properties...">
+        </div>
+        
+        <div class="dashboard-user">
+          <div class="notifications">
+            <svg viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="badge"></span>
+          </div>
+          <div class="user-dropdown">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Customer" class="user-avatar">
+            <div class="user-info">
+              <h5>Rafiq Ahmed</h5>
+              <p>Customer</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="dashboard-content">
+        <h1 class="dashboard-title">Welcome back, Rafiq!</h1>
+        <p class="dashboard-subtitle">Track your saved properties and inquiries</p>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue">
+              <svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>12</h4>
+              <p>Saved Properties</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>5</h4>
+              <p>Active Inquiries</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon gold">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>3</h4>
+              <p>Replies Received</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon red">
+              <svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>48</h4>
+              <p>Properties Viewed</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <h4>Quick Actions</h4>
+          </div>
+          <div class="dashboard-card-body">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="properties.html" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                Search Properties
+              </a>
+              <a href="properties.html?type=bachelor" class="btn btn-secondary">
+                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                Bachelor Flats
+              </a>
+              <a href="contact.html" class="btn btn-secondary">
+                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                Contact Support
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+          <!-- Saved Properties -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Saved Properties</h4>
+              <a href="customer-dashboard.html" class="btn btn-sm btn-secondary">View All</a>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="saved-property-card">
+                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=200&q=80" alt="" class="saved-property-image">
+                <div class="saved-property-content">
+                  <div class="saved-property-price">৳12,000 <span style="font-size: 0.8rem; font-weight: 400; color: var(--gray-500);">/month</span></div>
+                  <h4 class="saved-property-title">Modern Bachelor Flat with Balcony</h4>
+                  <div class="saved-property-location">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Dhanmondi, Dhaka
+                  </div>
+                  <div class="saved-property-actions">
+                    <a href="property-detail.html" class="btn btn-sm btn-primary">View Details</a>
+                    <button class="btn btn-sm btn-secondary">Remove</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="saved-property-card">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=200&q=80" alt="" class="saved-property-image">
+                <div class="saved-property-content">
+                  <div class="saved-property-price">৳8,000 <span style="font-size: 0.8rem; font-weight: 400; color: var(--gray-500);">/month</span></div>
+                  <h4 class="saved-property-title">Cozy Bachelor Room Near AIUB</h4>
+                  <div class="saved-property-location">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Bashundhara R/A, Dhaka
+                  </div>
+                  <div class="saved-property-actions">
+                    <a href="property-detail.html" class="btn btn-sm btn-primary">View Details</a>
+                    <button class="btn btn-sm btn-secondary">Remove</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="saved-property-card">
+                <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=200&q=80" alt="" class="saved-property-image">
+                <div class="saved-property-content">
+                  <div class="saved-property-price">৳10,000 <span style="font-size: 0.8rem; font-weight: 400; color: var(--gray-500);">/month</span></div>
+                  <h4 class="saved-property-title">Premium Bachelor Suite</h4>
+                  <div class="saved-property-location">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Uttara, Dhaka
+                  </div>
+                  <div class="saved-property-actions">
+                    <a href="property-detail.html" class="btn btn-sm btn-primary">View Details</a>
+                    <button class="btn btn-sm btn-secondary">Remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- My Inquiries -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>My Inquiries</h4>
+              <a href="customer-inquiries.html" class="btn btn-sm btn-secondary">View All</a>
+            </div>
+            <div class="dashboard-card-body" style="padding: 0;">
+              <div class="inquiry-item">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                  <strong>Modern Bachelor Flat with Balcony</strong>
+                  <span class="inquiry-status replied">Replied</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.5rem;">Dhanmondi • ৳12,000/month</p>
+                <p style="font-size: 0.9rem; color: var(--gray-700);">"I'm interested in this property. Is it still available?"</p>
+                <p style="font-size: 0.8rem; color: var(--gray-500); margin-top: 0.5rem;">Sent 2 days ago • Reply received</p>
+              </div>
+              
+              <div class="inquiry-item">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                  <strong>Spacious 2BHK Family Apartment</strong>
+                  <span class="inquiry-status sent">Sent</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.5rem;">Mirpur-10 • ৳15,000/month</p>
+                <p style="font-size: 0.9rem; color: var(--gray-700);">"What's the advance payment required?"</p>
+                <p style="font-size: 0.8rem; color: var(--gray-500); margin-top: 0.5rem;">Sent 3 days ago • Awaiting reply</p>
+              </div>
+              
+              <div class="inquiry-item">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                  <strong>Cozy Bachelor Room Near AIUB</strong>
+                  <span class="inquiry-status replied">Replied</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.5rem;">Bashundhara • ৳8,000/month</p>
+                <p style="font-size: 0.9rem; color: var(--gray-700);">"Is gas and electricity included in the rent?"</p>
+                <p style="font-size: 0.8rem; color: var(--gray-500); margin-top: 0.5rem;">Sent 5 days ago • Reply received</p>
+              </div>
+              
+              <div class="inquiry-item">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                  <strong>Premium Bachelor Suite Near Airport</strong>
+                  <span class="inquiry-status sent">Sent</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.5rem;">Uttara • ৳10,000/month</p>
+                <p style="font-size: 0.9rem; color: var(--gray-700);">"Can I schedule a visit this weekend?"</p>
+                <p style="font-size: 0.8rem; color: var(--gray-500); margin-top: 0.5rem;">Sent 1 week ago • Awaiting reply</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recently Viewed -->
+        <div class="dashboard-card recently-viewed-section" style="margin-top: 1.5rem;">
+          <div class="dashboard-card-header">
+            <h4>Recently Viewed Properties</h4>
+            <a href="properties.html" class="btn btn-sm btn-secondary">Browse More</a>
+          </div>
+          <div class="dashboard-card-body">
+            <div class="property-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+              <!-- Properties will be dynamically loaded here -->
+              <div class="property-card" data-id="demo-1">
+                <div class="property-image">
+                  <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800&q=80" alt="Bachelor Flat in Banani">
+                  <span class="property-badge bachelor">Bachelor Flat</span>
+                  <button class="property-favorite active" aria-label="Remove from favorites">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="property-content">
+                  <div class="property-price">৳9,500 <span>/month</span></div>
+                  <h3 class="property-title">Secure Bachelor Flat in Banani</h3>
+                  <div class="property-location">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Banani, Dhaka
+                  </div>
+                  <div class="property-features">
+                    <span class="feature"><svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg> 1 Bed</span>
+                    <span class="feature"><svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> 1 Bath</span>
+                    <span class="feature"><svg viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg> 380 sqft</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="property-card" data-id="5">
+                <div class="property-image">
+                  <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80" alt="Luxury Apartment in Gulshan">
+                  <span class="property-badge">Premium</span>
+                  <button class="property-favorite" aria-label="Add to favorites">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="property-content">
+                  <div class="property-price">৳18,000 <span>/month</span></div>
+                  <h3 class="property-title">Luxury 2BHK in Prime Location</h3>
+                  <div class="property-location">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Gulshan-2, Dhaka
+                  </div>
+                  <div class="property-features">
+                    <span class="feature"><svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg> 2 Beds</span>
+                    <span class="feature"><svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> 2 Bath</span>
+                    <span class="feature"><svg viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg> 1000 sqft</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="property-card" data-id="6">
+                <div class="property-image">
+                  <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&q=80" alt="Budget-Friendly Bachelor Flat">
+                  <span class="property-badge bachelor">Bachelor Flat</span>
+                  <button class="property-favorite" aria-label="Add to favorites">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="property-content">
+                  <div class="property-price">৳7,000 <span>/month</span></div>
+                  <h3 class="property-title">Budget-Friendly Bachelor Room</h3>
+                  <div class="property-location">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Mohammadpur, Dhaka
+                  </div>
+                  <div class="property-features">
+                    <span class="feature"><svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg> 1 Bed</span>
+                    <span class="feature"><svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> 1 Bath</span>
+                    <span class="feature"><svg viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg> 300 sqft</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+

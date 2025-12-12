@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin Analytics - FlatFinders">
+  <title>Analytics - Admin Dashboard</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c9a66b' rx='15' width='100' height='100'/><path fill='white' d='M50 20L20 45v35h25V55h10v25h25V45L50 20z'/></svg>">
+  <style>
+    .analytics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 1.5rem; }
+    @media (max-width: 1200px) { .analytics-grid { grid-template-columns: 1fr; } }
+    .chart-container { position: relative; }
+    .metric-row { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--gray-200); }
+    .metric-row:last-child { border-bottom: none; }
+    .metric-label { color: var(--gray-600); }
+    .metric-value { font-weight: 600; color: var(--gray-800); }
+    .metric-change { font-size: 0.85rem; }
+    .metric-change.up { color: var(--success); }
+    .metric-change.down { color: var(--error); }
+    .top-list-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--gray-100); }
+    .top-list-item:last-child { border-bottom: none; }
+    .top-list-rank { width: 28px; height: 28px; background: var(--primary-gold); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600; }
+    .top-list-info { flex: 1; }
+    .top-list-info h5 { margin: 0 0 0.25rem; font-size: 0.95rem; }
+    .top-list-info p { margin: 0; font-size: 0.8rem; color: var(--gray-500); }
+    .top-list-value { font-weight: 600; color: var(--primary-gold); }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="dashboard-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9.5L12 3L21 9.5V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9.5Z" fill="currentColor"/>
+            <path d="M9 22V12H15V22" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="logo-text">FlatFinders</span>
+      </div>
+      
+      <nav class="dashboard-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <a href="admin-dashboard.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Dashboard
+          </a>
+          <a href="admin-properties.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            Properties
+          </a>
+          <a href="admin-users.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            Users
+          </a>
+          <a href="admin-inquiries.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            Inquiries
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Reports</span>
+          <a href="admin-analytics.html" class="dashboard-nav-link active">
+            <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            Analytics
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Settings</span>
+          <a href="admin-settings.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Settings
+          </a>
+          <a href="index.html" class="dashboard-nav-link" onclick="logout(); return false;">
+            <svg viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="dashboard-search">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" placeholder="Search...">
+        </div>
+        
+        <div class="dashboard-user">
+          <div class="notifications">
+            <svg viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="badge"></span>
+          </div>
+          <div class="user-dropdown">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Admin" class="user-avatar">
+            <div class="user-info">
+              <h5>Admin User</h5>
+              <p>Administrator</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="dashboard-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <div>
+            <h1 class="dashboard-title">Platform Analytics</h1>
+            <p class="dashboard-subtitle">Comprehensive insights into platform performance</p>
+          </div>
+          <select style="padding: 0.5rem 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-md);">
+            <option>Last 30 Days</option>
+            <option>Last 7 Days</option>
+            <option>Last 90 Days</option>
+            <option>This Year</option>
+          </select>
+        </div>
+
+        <!-- Overview Stats -->
+        <div class="stats-grid" style="margin-bottom: 2rem;">
+          <div class="stat-card">
+            <div class="stat-icon blue">
+              <svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>45,892</h4>
+              <p>Total Page Views</p>
+              <span class="stat-change up">↑ 18% from last month</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <svg viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>12,456</h4>
+              <p>Unique Visitors</p>
+              <span class="stat-change up">↑ 24% from last month</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon gold">
+              <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>8.5%</h4>
+              <p>Inquiry Rate</p>
+              <span class="stat-change up">↑ 2.3% from last month</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon red">
+              <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>3m 42s</h4>
+              <p>Avg. Session Duration</p>
+              <span class="stat-change up">↑ 15s from last month</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="analytics-grid">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Traffic Overview</h4>
+              <select id="trafficPeriod" style="padding: 0.5rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);">
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+              </select>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="chart-container">
+                <canvas id="trafficChart" width="600" height="280"></canvas>
+              </div>
+            </div>
+          </div>
+          
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Key Metrics</h4>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="metric-row">
+                <span class="metric-label">Bounce Rate</span>
+                <div>
+                  <span class="metric-value">32.5%</span>
+                  <span class="metric-change down"> ↓ 2.1%</span>
+                </div>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Pages per Session</span>
+                <div>
+                  <span class="metric-value">4.2</span>
+                  <span class="metric-change up"> ↑ 0.3</span>
+                </div>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">New vs Returning</span>
+                <div>
+                  <span class="metric-value">65% / 35%</span>
+                </div>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Property Views</span>
+                <div>
+                  <span class="metric-value">28,456</span>
+                  <span class="metric-change up"> ↑ 12%</span>
+                </div>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Inquiries Sent</span>
+                <div>
+                  <span class="metric-value">1,245</span>
+                  <span class="metric-change up"> ↑ 18%</span>
+                </div>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">User Registrations</span>
+                <div>
+                  <span class="metric-value">342</span>
+                  <span class="metric-change up"> ↑ 24%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <!-- Top Properties -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Top Properties by Views</h4>
+              <a href="admin-properties.html" class="btn btn-sm btn-secondary">View All</a>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="top-list-item">
+                <span class="top-list-rank">1</span>
+                <div class="top-list-info">
+                  <h5>Modern Bachelor Flat with Balcony</h5>
+                  <p>Dhanmondi • Bachelor Flat</p>
+                </div>
+                <span class="top-list-value">1,245 views</span>
+              </div>
+              <div class="top-list-item">
+                <span class="top-list-rank">2</span>
+                <div class="top-list-info">
+                  <h5>Spacious 2BHK Family Apartment</h5>
+                  <p>Mirpur-10 • Apartment</p>
+                </div>
+                <span class="top-list-value">982 views</span>
+              </div>
+              <div class="top-list-item">
+                <span class="top-list-rank">3</span>
+                <div class="top-list-info">
+                  <h5>Premium Bachelor Suite Near Airport</h5>
+                  <p>Uttara • Bachelor Flat</p>
+                </div>
+                <span class="top-list-value">876 views</span>
+              </div>
+              <div class="top-list-item">
+                <span class="top-list-rank">4</span>
+                <div class="top-list-info">
+                  <h5>Luxury 2BHK in Prime Location</h5>
+                  <p>Gulshan-2 • Apartment</p>
+                </div>
+                <span class="top-list-value">754 views</span>
+              </div>
+              <div class="top-list-item">
+                <span class="top-list-rank">5</span>
+                <div class="top-list-info">
+                  <h5>Cozy Bachelor Room Near AIUB</h5>
+                  <p>Bashundhara • Bachelor Flat</p>
+                </div>
+                <span class="top-list-value">698 views</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Locations -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Top Locations by Searches</h4>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="top-list-item">
+                <span class="top-list-rank">1</span>
+                <div class="top-list-info">
+                  <h5>Dhanmondi</h5>
+                  <p>245 properties listed</p>
+                </div>
+                <span class="top-list-value">4,521 searches</span>
+              </div>
+              <div class="top-list-item">
+                <span class="top-list-rank">2</span>
+                <div class="top-list-info">
+                  <h5>Uttara</h5>
+                  <p>189 properties listed</p>
+                </div>
+                <span class="top-list-value">3,892 searches</span>
+              </div>
+              <div class="top-list-item">
+                <span class="top-list-rank">3</span>
+                <div class="top-list-info">
+                  <h5>Mirpur</h5>
+                  <p>312 properties listed</p>
+                </div>
+                <span class="top-list-value">3,456 searches</span>
+              </div>
+              <div class="top-list-item">
+                <span class="top-list-rank">4</span>
+                <div class="top-list-info">
+                  <h5>Bashundhara</h5>
+                  <p>156 properties listed</p>
+                </div>
+                <span class="top-list-value">2,987 searches</span>
+              </div>
+              <div class="top-list-item">
+                <span class="top-list-rank">5</span>
+                <div class="top-list-info">
+                  <h5>Gulshan</h5>
+                  <p>98 properties listed</p>
+                </div>
+                <span class="top-list-value">2,145 searches</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Device & Browser Stats -->
+        <div class="analytics-grid">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Device Distribution</h4>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="chart-container" style="display: flex; align-items: center; gap: 2rem;">
+                <canvas id="deviceChart" width="150" height="150"></canvas>
+                <div style="flex: 1;">
+                  <div class="metric-row">
+                    <span class="metric-label">📱 Mobile</span>
+                    <span class="metric-value">58%</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">💻 Desktop</span>
+                    <span class="metric-value">35%</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">📟 Tablet</span>
+                    <span class="metric-value">7%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Traffic Sources</h4>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="metric-row">
+                <span class="metric-label">🔍 Organic Search</span>
+                <div>
+                  <span class="metric-value">45%</span>
+                  <span class="metric-change up"> ↑ 5%</span>
+                </div>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">📱 Direct</span>
+                <div>
+                  <span class="metric-value">28%</span>
+                  <span class="metric-change up"> ↑ 3%</span>
+                </div>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">📲 Social Media</span>
+                <div>
+                  <span class="metric-value">18%</span>
+                  <span class="metric-change up"> ↑ 8%</span>
+                </div>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">🔗 Referral</span>
+                <div>
+                  <span class="metric-value">9%</span>
+                  <span class="metric-change down"> ↓ 2%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Traffic Chart
+    document.addEventListener('DOMContentLoaded', function() {
+      const trafficCanvas = document.getElementById('trafficChart');
+      if (trafficCanvas) {
+        const ctx = trafficCanvas.getContext('2d');
+        const data = [2500, 3200, 2800, 4100, 3800, 4500, 4200, 5100, 4800, 5500, 5200, 6000];
+        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        
+        const width = trafficCanvas.width = trafficCanvas.parentElement.offsetWidth;
+        const height = trafficCanvas.height = 280;
+        const padding = 50;
+        const maxValue = Math.max(...data) * 1.1;
+        const stepX = (width - padding * 2) / (data.length - 1);
+        
+        // Draw grid lines
+        ctx.strokeStyle = '#e9ecef';
+        ctx.lineWidth = 1;
+        for (let i = 0; i <= 5; i++) {
+          const y = padding + (i * (height - padding * 2) / 5);
+          ctx.beginPath();
+          ctx.moveTo(padding, y);
+          ctx.lineTo(width - padding, y);
+          ctx.stroke();
+        }
+        
+        // Draw area fill
+        ctx.beginPath();
+        ctx.moveTo(padding, height - padding);
+        data.forEach((value, index) => {
+          const x = padding + index * stepX;
+          const y = height - padding - (value / maxValue) * (height - padding * 2);
+          ctx.lineTo(x, y);
+        });
+        ctx.lineTo(padding + (data.length - 1) * stepX, height - padding);
+        ctx.closePath();
+        
+        const gradient = ctx.createLinearGradient(0, 0, 0, height);
+        gradient.addColorStop(0, '#c9a66b40');
+        gradient.addColorStop(1, '#c9a66b05');
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        // Draw line
+        ctx.beginPath();
+        ctx.strokeStyle = '#c9a66b';
+        ctx.lineWidth = 3;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        
+        data.forEach((value, index) => {
+          const x = padding + index * stepX;
+          const y = height - padding - (value / maxValue) * (height - padding * 2);
+          
+          if (index === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        });
+        
+        ctx.stroke();
+        
+        // Draw points and labels
+        data.forEach((value, index) => {
+          const x = padding + index * stepX;
+          const y = height - padding - (value / maxValue) * (height - padding * 2);
+          
+          ctx.beginPath();
+          ctx.fillStyle = '#fff';
+          ctx.arc(x, y, 5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = '#c9a66b';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          
+          // Label
+          ctx.fillStyle = '#6c757d';
+          ctx.font = '11px Outfit';
+          ctx.textAlign = 'center';
+          ctx.fillText(labels[index], x, height - 20);
+        });
+      }
+
+      // Device Chart (Mini pie chart)
+      const deviceCanvas = document.getElementById('deviceChart');
+      if (deviceCanvas) {
+        const ctx = deviceCanvas.getContext('2d');
+        const data = [58, 35, 7];
+        const colors = ['#c9a66b', '#1a1a2e', '#17a2b8'];
+        const total = data.reduce((sum, val) => sum + val, 0);
+        
+        const centerX = 75;
+        const centerY = 75;
+        const radius = 60;
+        
+        let startAngle = -Math.PI / 2;
+        
+        data.forEach((value, index) => {
+          const sliceAngle = (value / total) * Math.PI * 2;
+          
+          ctx.beginPath();
+          ctx.moveTo(centerX, centerY);
+          ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+          ctx.closePath();
+          ctx.fillStyle = colors[index];
+          ctx.fill();
+          
+          ctx.strokeStyle = '#fff';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          
+          startAngle += sliceAngle;
+        });
+        
+        // Draw center circle (donut effect)
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius * 0.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#fff';
+        ctx.fill();
+      }
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact FlatFinders - Get in touch with our support team for any queries about rental properties.">
+  <title>Contact Us - FlatFinders</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c9a66b' rx='15' width='100' height='100'/><path fill='white' d='M50 20L20 45v35h25V55h10v25h25V45L50 20z'/></svg>">
+  <style>
+    .contact-section { padding: 4rem 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; }
+    @media (max-width: 991px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-info-card { background: var(--primary-dark); color: var(--white); padding: 2.5rem; border-radius: var(--radius-lg); height: 100%; }
+    .contact-info-card h3 { color: var(--white); margin-bottom: 1rem; }
+    .contact-info-card p { color: var(--gray-400); margin-bottom: 2rem; }
+    .contact-info-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+    .contact-info-icon { width: 48px; height: 48px; background: rgba(201, 166, 107, 0.15); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-info-icon svg { width: 24px; height: 24px; fill: var(--primary-gold); }
+    .contact-info-text h5 { color: var(--white); margin-bottom: 0.25rem; font-size: 1rem; }
+    .contact-info-text p { color: var(--gray-400); font-size: 0.95rem; margin-bottom: 0; }
+    .social-links { display: flex; gap: 1rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    .social-links a { width: 44px; height: 44px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast); }
+    .social-links a:hover { background: var(--primary-gold); }
+    .social-links svg { width: 20px; height: 20px; fill: var(--white); }
+    .contact-form-card { background: var(--white); padding: 2.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+    .contact-form-card h3 { margin-bottom: 0.5rem; }
+    .contact-form-card > p { color: var(--gray-600); margin-bottom: 2rem; }
+    .faq-section { padding: 4rem 0; background: var(--gray-100); }
+    .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .faq-card { background: var(--white); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+    .faq-card h4 { margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .faq-card p { color: var(--gray-600); font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9.5L12 3L21 9.5V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9.5Z" fill="currentColor"/>
+            <path d="M9 22V12H15V22" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="logo-text">FlatFinders</span>
+      </a>
+      
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="properties.html" class="nav-link">Properties</a></li>
+        <li><a href="post-property.html" class="nav-link">Post Property</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
+      </ul>
+      
+      <div class="navbar-actions">
+        <a href="login.html" class="btn btn-secondary">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </div>
+      
+      <button class="navbar-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span>Contact</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Contact Info -->
+        <div class="contact-info-card">
+          <h3>Get in Touch</h3>
+          <p>Have questions about our platform? We're here to help you find your perfect rental property.</p>
+          
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-info-text">
+              <h5>Address</h5>
+              <p>House 45, Road 12, Dhanmondi<br>Dhaka 1209, Bangladesh</p>
+            </div>
+          </div>
+          
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </div>
+            <div class="contact-info-text">
+              <h5>Phone</h5>
+              <p>+880 1700-000000<br>+880 1800-000000</p>
+            </div>
+          </div>
+          
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div class="contact-info-text">
+              <h5>Email</h5>
+              <p>info@flatfinders.com<br>support@flatfinders.com</p>
+            </div>
+          </div>
+          
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div class="contact-info-text">
+              <h5>Business Hours</h5>
+              <p>Saturday - Thursday: 9AM - 6PM<br>Friday: Closed</p>
+            </div>
+          </div>
+          
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-card">
+          <h3>Send us a Message</h3>
+          <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+          
+          <form id="contactForm">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" class="form-control" placeholder="John" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" class="form-control" placeholder="Doe" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" class="form-control" placeholder="+880 1XXX-XXXXXX">
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <select id="subject" class="form-control" required>
+                <option value="">Select a subject</option>
+                <option value="general">General Inquiry</option>
+                <option value="property">Property Inquiry</option>
+                <option value="listing">Listing Help</option>
+                <option value="technical">Technical Support</option>
+                <option value="feedback">Feedback</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" class="form-control" rows="5" placeholder="Tell us how we can help you..." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Find answers to common questions about FlatFinders</p>
+      </div>
+      
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h4>How do I list my property?</h4>
+          <p>Simply create an account as a Property Owner, then click "Post Property" and fill out the listing form. Our team will review and approve your listing within 24-48 hours.</p>
+        </div>
+        
+        <div class="faq-card">
+          <h4>Is FlatFinders free to use?</h4>
+          <p>Browsing properties and sending inquiries is completely free for customers. Property owners can list up to 3 properties for free, with premium options available.</p>
+        </div>
+        
+        <div class="faq-card">
+          <h4>How do I contact a property owner?</h4>
+          <p>Click on any property listing to view details, then use the inquiry form to send a message directly to the property owner. You'll need to be logged in to send inquiries.</p>
+        </div>
+        
+        <div class="faq-card">
+          <h4>What is a Bachelor Flat?</h4>
+          <p>A Bachelor Flat is a single-occupancy rental unit designed for individuals, without roommates or shared living spaces. Use our Bachelor Flat filter to find these properties.</p>
+        </div>
+        
+        <div class="faq-card">
+          <h4>Are properties verified?</h4>
+          <p>Yes, our team reviews all property listings before they go live. We verify basic information and photos to ensure quality listings for our users.</p>
+        </div>
+        
+        <div class="faq-card">
+          <h4>How do I reset my password?</h4>
+          <p>Click on "Forgot Password" on the login page and enter your email address. We'll send you a link to reset your password within minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand"><span class="logo-text">FlatFinders</span></div>
+          <p class="footer-description">Your trusted partner in finding the perfect rental property.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h5>Quick Links</h5>
+          <div class="footer-links">
+            <a href="properties.html">Browse Properties</a>
+            <a href="post-property.html">List Your Property</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h5>Property Types</h5>
+          <div class="footer-links">
+            <a href="properties.html?type=bachelor">Bachelor Flats</a>
+            <a href="properties.html?type=apartment">Apartments</a>
+            <a href="properties.html?type=house">Houses</a>
+            <a href="properties.html?type=studio">Studio</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h5>Popular Locations</h5>
+          <div class="footer-links">
+            <a href="properties.html?location=dhanmondi">Dhanmondi</a>
+            <a href="properties.html?location=mirpur">Mirpur</a>
+            <a href="properties.html?location=bashundhara">Bashundhara</a>
+            <a href="properties.html?location=uttara">Uttara</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 FlatFinders. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login to FlatFinders - Access your account to manage properties and inquiries.">
+  <title>Login - FlatFinders</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c9a66b' rx='15' width='100' height='100'/><path fill='white' d='M50 20L20 45v35h25V55h10v25h25V45L50 20z'/></svg>">
+</head>
+<body>
+  <div class="auth-page">
+    <!-- Sidebar -->
+    <aside class="auth-sidebar">
+      <div class="auth-sidebar-content">
+        <h2>Welcome Back!</h2>
+        <p>Sign in to access your dashboard, manage properties, and connect with potential tenants or landlords.</p>
+        
+        <div class="auth-features">
+          <div class="auth-feature">
+            <div class="auth-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            </div>
+            <div class="auth-feature-text">
+              <h5>Manage Properties</h5>
+              <p>Post, edit, and track your property listings</p>
+            </div>
+          </div>
+          
+          <div class="auth-feature">
+            <div class="auth-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <div class="auth-feature-text">
+              <h5>Quick Communication</h5>
+              <p>Direct messaging with property owners/renters</p>
+            </div>
+          </div>
+          
+          <div class="auth-feature">
+            <div class="auth-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <div class="auth-feature-text">
+              <h5>Save Favorites</h5>
+              <p>Keep track of properties you love</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="auth-main">
+      <div class="auth-form-container">
+        <div class="auth-form-header">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9.5L12 3L21 9.5V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9.5Z" fill="currentColor"/>
+                <path d="M9 22V12H15V22" stroke="white" stroke-width="2"/>
+              </svg>
+            </div>
+            <span class="logo-text">FlatFinders</span>
+          </a>
+          <h1>Sign In</h1>
+          <p>Enter your credentials or use quick login buttons below</p>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="userRole">Select Role *</label>
+            <select id="userRole" class="form-control" required>
+              <option value="">-- Select Your Role --</option>
+              <option value="admin">Admin</option>
+              <option value="owner">Property Owner</option>
+              <option value="customer">Customer</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-toggle">
+              <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+              <button type="button" class="toggle-btn" aria-label="Toggle password visibility">
+                <svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              </button>
+            </div>
+          </div>
+          
+          <div class="remember-forgot">
+            <label class="custom-checkbox">
+              <input type="checkbox" name="remember">
+              <span class="checkbox-mark">
+                <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+              </span>
+              <span>Remember me</span>
+            </label>
+            <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
+        </form>
+
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="register.html">Create Account</a></p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // ========================================
+    // LOGIN PAGE - Clean Session on Load
+    // ========================================
+    
+    console.log('🔒 Login page initializing...');
+    
+    // Clear any existing sessions
+    sessionStorage.clear();
+    localStorage.clear();
+    console.log('✅ All sessions cleared');
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('✅ Login page ready');
+      console.log('📝 Select role → Enter email → Enter password → Click Sign In');
+    });
+  </script>
+</body>
+</html>

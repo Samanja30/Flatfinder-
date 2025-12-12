@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About FlatFinders - Learn about our mission to connect renters with property owners in Bangladesh.">
+  <title>About Us - FlatFinders</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c9a66b' rx='15' width='100' height='100'/><path fill='white' d='M50 20L20 45v35h25V55h10v25h25V45L50 20z'/></svg>">
+  <style>
+    .about-hero { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-dark-light) 100%); padding: 8rem 0 4rem; color: var(--white); }
+    .about-hero h1 { color: var(--white); font-size: 3rem; margin-bottom: 1rem; }
+    .about-hero p { color: var(--gray-400); max-width: 600px; font-size: 1.1rem; }
+    .about-section { padding: 5rem 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    @media (max-width: 991px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-image { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-xl); }
+    .about-image img { width: 100%; height: 400px; object-fit: cover; }
+    .about-content h2 { margin-bottom: 1.5rem; }
+    .about-content p { color: var(--gray-600); margin-bottom: 1rem; line-height: 1.8; }
+    .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+    .value-card { text-align: center; padding: 2rem; }
+    .value-icon { width: 80px; height: 80px; background: rgba(201, 166, 107, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+    .value-icon svg { width: 36px; height: 36px; fill: var(--primary-gold); }
+    .value-card h4 { margin-bottom: 0.75rem; }
+    .value-card p { color: var(--gray-600); font-size: 0.95rem; }
+    .team-section { background: var(--gray-100); padding: 5rem 0; }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+    .team-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); text-align: center; }
+    .team-card img { width: 100%; height: 280px; object-fit: cover; }
+    .team-card-content { padding: 1.5rem; }
+    .team-card h4 { margin-bottom: 0.25rem; }
+    .team-card p { color: var(--primary-gold); font-size: 0.9rem; margin-bottom: 1rem; }
+    .team-social { display: flex; justify-content: center; gap: 0.75rem; }
+    .team-social a { width: 36px; height: 36px; background: var(--gray-100); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .team-social a:hover { background: var(--primary-gold); }
+    .team-social svg { width: 16px; height: 16px; fill: var(--gray-600); }
+    .team-social a:hover svg { fill: var(--white); }
+    .stats-section { background: var(--primary-dark); padding: 4rem 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+    @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    .stats-item h3 { font-family: var(--font-primary); font-size: 3rem; color: var(--primary-gold); margin-bottom: 0.5rem; }
+    .stats-item p { color: var(--gray-400); }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9.5L12 3L21 9.5V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9.5Z" fill="currentColor"/>
+            <path d="M9 22V12H15V22" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="logo-text">FlatFinders</span>
+      </a>
+      
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="properties.html" class="nav-link">Properties</a></li>
+        <li><a href="post-property.html" class="nav-link">Post Property</a></li>
+        <li><a href="about.html" class="nav-link active">About Us</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      
+      <div class="navbar-actions">
+        <a href="login.html" class="btn btn-secondary">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </div>
+      
+      <button class="navbar-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- About Hero -->
+  <section class="about-hero">
+    <div class="container">
+      <h1>About FlatFinders</h1>
+      <p>We're on a mission to make finding rental properties in Bangladesh easier, faster, and more transparent for everyone.</p>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section class="about-section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="FlatFinders Office">
+        </div>
+        <div class="about-content">
+          <h2>Our Story</h2>
+          <p>FlatFinders was founded in 2023 with a simple goal: to solve the pain points of finding rental properties in Bangladesh. We noticed that the traditional process of finding a flat was time-consuming, frustrating, and often lacked transparency.</p>
+          <p>Whether you're a student looking for a bachelor flat near your university, a young professional searching for an apartment in the city, or a family seeking a spacious house - we believe everyone deserves an easy way to find their perfect home.</p>
+          <p>Today, FlatFinders has grown to become one of the leading property rental platforms in Bangladesh, connecting thousands of renters with verified property owners every month.</p>
+          <a href="contact.html" class="btn btn-primary" style="margin-top: 1rem;">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stats-item">
+          <h3>5,000+</h3>
+          <p>Properties Listed</p>
+        </div>
+        <div class="stats-item">
+          <h3>10,000+</h3>
+          <p>Happy Customers</p>
+        </div>
+        <div class="stats-item">
+          <h3>50+</h3>
+          <p>Locations Covered</p>
+        </div>
+        <div class="stats-item">
+          <h3>98%</h3>
+          <p>Customer Satisfaction</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Values -->
+  <section class="about-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Values</h2>
+        <p>The principles that guide everything we do</p>
+      </div>
+      
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h4>Trust & Transparency</h4>
+          <p>We verify all listings and ensure complete transparency in every transaction between renters and property owners.</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </div>
+          <h4>Community First</h4>
+          <p>We build features that serve our community of renters and property owners, listening to their feedback constantly.</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h4>Innovation</h4>
+          <p>We continuously innovate to make property search easier, from smart filters to instant communication tools.</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <h4>Customer Love</h4>
+          <p>Our customers are at the heart of everything we do. We're not satisfied until you find your perfect home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Meet Our Team</h2>
+        <p>The passionate people behind FlatFinders</p>
+      </div>
+      
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Rahim Ahmed">
+          <div class="team-card-content">
+            <h4>Rahim Ahmed</h4>
+            <p>CEO & Founder</p>
+            <div class="team-social">
+              <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+              <a href="#"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" alt="Fatima Khatun">
+          <div class="team-card-content">
+            <h4>Fatima Khatun</h4>
+            <p>Head of Operations</p>
+            <div class="team-social">
+              <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+              <a href="#"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop" alt="Kamal Hossain">
+          <div class="team-card-content">
+            <h4>Kamal Hossain</h4>
+            <p>Tech Lead</p>
+            <div class="team-social">
+              <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+              <a href="#"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop" alt="Nasreen Begum">
+          <div class="team-card-content">
+            <h4>Nasreen Begum</h4>
+            <p>Customer Success</p>
+            <div class="team-social">
+              <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+              <a href="#"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Find Your Perfect Home?</h2>
+        <p>Join thousands of happy renters who found their ideal space through FlatFinders.</p>
+        <div class="cta-buttons">
+          <a href="properties.html" class="btn btn-primary btn-lg">Browse Properties</a>
+          <a href="contact.html" class="btn btn-outline-white btn-lg">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand"><span class="logo-text">FlatFinders</span></div>
+          <p class="footer-description">Your trusted partner in finding the perfect rental property.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h5>Quick Links</h5>
+          <div class="footer-links">
+            <a href="properties.html">Browse Properties</a>
+            <a href="post-property.html">List Your Property</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h5>Property Types</h5>
+          <div class="footer-links">
+            <a href="properties.html?type=bachelor">Bachelor Flats</a>
+            <a href="properties.html?type=apartment">Apartments</a>
+            <a href="properties.html?type=house">Houses</a>
+            <a href="properties.html?type=studio">Studio</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h5>Popular Locations</h5>
+          <div class="footer-links">
+            <a href="properties.html?location=dhanmondi">Dhanmondi</a>
+            <a href="properties.html?location=mirpur">Mirpur</a>
+            <a href="properties.html?location=bashundhara">Bashundhara</a>
+            <a href="properties.html?location=uttara">Uttara</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 FlatFinders. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+

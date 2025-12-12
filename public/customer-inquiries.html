@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="My Inquiries - FlatFinders">
+  <title>My Inquiries - FlatFinders</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c9a66b' rx='15' width='100' height='100'/><path fill='white' d='M50 20L20 45v35h25V55h10v25h25V45L50 20z'/></svg>">
+  <style>
+    .inquiry-filters { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .inquiry-filters .btn { padding: 0.5rem 1rem; }
+    .inquiry-card { border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1rem; transition: all var(--transition-base); }
+    .inquiry-card:hover { box-shadow: var(--shadow-md); }
+    .inquiry-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; gap: 1rem; flex-wrap: wrap; }
+    .inquiry-property { display: flex; gap: 1rem; }
+    .inquiry-property-image { width: 80px; height: 60px; border-radius: var(--radius-sm); object-fit: cover; }
+    .inquiry-property-info h4 { font-size: 1rem; margin-bottom: 0.25rem; }
+    .inquiry-property-info p { font-size: 0.85rem; color: var(--gray-600); display: flex; align-items: center; gap: 0.25rem; }
+    .inquiry-property-info svg { width: 14px; height: 14px; fill: var(--primary-gold); }
+    .inquiry-meta { display: flex; gap: 1rem; font-size: 0.85rem; color: var(--gray-600); margin-bottom: 1rem; flex-wrap: wrap; }
+    .inquiry-message { background: var(--gray-100); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1rem; }
+    .inquiry-message strong { display: block; margin-bottom: 0.5rem; color: var(--gray-800); }
+    .inquiry-response { background: var(--off-white); border-left: 3px solid var(--primary-gold); padding: 1rem; border-radius: var(--radius-sm); }
+    .inquiry-response strong { display: block; margin-bottom: 0.5rem; color: var(--primary-gold); }
+    .inquiry-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    @media (max-width: 768px) { .inquiry-card-header { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="dashboard-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9.5L12 3L21 9.5V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9.5Z" fill="currentColor"/>
+            <path d="M9 22V12H15V22" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="logo-text">FlatFinders</span>
+      </div>
+      
+      <nav class="dashboard-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <a href="customer-dashboard.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Dashboard
+          </a>
+          <a href="properties.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            Browse Properties
+          </a>
+          <a href="customer-dashboard.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            Saved Properties
+          </a>
+          <a href="customer-inquiries.html" class="dashboard-nav-link active">
+            <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            My Inquiries
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Account</span>
+          <a href="customer-profile.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            My Profile
+          </a>
+          <a href="customer-settings.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Settings
+          </a>
+          <a href="index.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="dashboard-search">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" placeholder="Search inquiries...">
+        </div>
+        
+        <div class="dashboard-user">
+          <div class="notifications">
+            <svg viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="badge"></span>
+          </div>
+          <div class="user-dropdown">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Customer" class="user-avatar">
+            <div class="user-info">
+              <h5>Customer User</h5>
+              <p>Customer</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="dashboard-content">
+        <h1 class="dashboard-title">My Inquiries</h1>
+        <p class="dashboard-subtitle">Track and manage your property inquiries</p>
+
+        <!-- Filters -->
+        <div class="inquiry-filters">
+          <button class="btn btn-primary inquiry-filter-btn active" data-filter="all">All Inquiries</button>
+          <button class="btn btn-secondary inquiry-filter-btn" data-filter="pending">Pending</button>
+          <button class="btn btn-secondary inquiry-filter-btn" data-filter="replied">Replied</button>
+        </div>
+
+        <!-- Inquiries List -->
+        <div id="inquiriesList">
+          <!-- Inquiry Card 1 - Replied -->
+          <div class="inquiry-card" data-status="replied" id="inquiry-1">
+            <div class="inquiry-card-header">
+              <div class="inquiry-property">
+                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=200&q=80" alt="Property" class="inquiry-property-image">
+                <div class="inquiry-property-info">
+                  <h4>Modern Bachelor Flat with Balcony</h4>
+                  <p>
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Dhanmondi, Dhaka
+                  </p>
+                </div>
+              </div>
+              <span class="status-badge replied">Replied</span>
+            </div>
+            
+            <div class="inquiry-meta">
+              <span>📅 Sent: Dec 10, 2024</span>
+              <span>📧 To: Fatima Khan</span>
+            </div>
+            
+            <div class="inquiry-message">
+              <strong>Your Message:</strong>
+              <p>Hi, I'm interested in this property. Is it still available? I would like to schedule a visit this weekend. Please let me know your available time slots. Thanks!</p>
+            </div>
+            
+            <div class="inquiry-response">
+              <strong>Owner's Response:</strong>
+              <p>Hello! Yes, the property is still available. I'm free on Saturday between 10 AM - 4 PM and Sunday 2 PM - 6 PM. Please let me know which time works best for you. Looking forward to showing you the place!</p>
+              <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--gray-600);">Replied on Dec 10, 2024 at 3:45 PM</p>
+            </div>
+            
+            <div id="conversation-1"></div>
+            
+            <div class="inquiry-actions" style="margin-top: 1rem;">
+              <button class="btn btn-secondary" onclick="window.open('property-detail.html', '_blank')">
+                <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                View Property
+              </button>
+              <button class="btn btn-primary" onclick="showReplyForm(1)">Reply Back</button>
+            </div>
+            
+            <div id="reply-form-1" style="display: none; margin-top: 1rem; background: var(--gray-100); padding: 1rem; border-radius: var(--radius-sm);">
+              <strong style="display: block; margin-bottom: 0.5rem;">Your Reply:</strong>
+              <textarea id="reply-text-1" style="width: 100%; min-height: 100px; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); margin-bottom: 0.75rem; resize: vertical;" placeholder="Type your reply here..."></textarea>
+              <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-primary" onclick="sendCustomerReply(1)">Send Reply</button>
+                <button class="btn btn-secondary" onclick="hideReplyForm(1)">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inquiry Card 2 - Pending -->
+          <div class="inquiry-card" data-status="pending">
+            <div class="inquiry-card-header">
+              <div class="inquiry-property">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=200&q=80" alt="Property" class="inquiry-property-image">
+                <div class="inquiry-property-info">
+                  <h4>Cozy Bachelor Room Near AIUB</h4>
+                  <p>
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Bashundhara R/A, Dhaka
+                  </p>
+                </div>
+              </div>
+              <span class="status-badge pending">Pending</span>
+            </div>
+            
+            <div class="inquiry-meta">
+              <span>📅 Sent: Dec 11, 2024</span>
+              <span>📧 To: Ahmed Hassan</span>
+            </div>
+            
+            <div class="inquiry-message">
+              <strong>Your Message:</strong>
+              <p>Good evening! I'm a student at AIUB. Could you please share more details about the amenities and monthly utility costs? Also, is cooking allowed?</p>
+            </div>
+            
+            <div class="inquiry-actions" style="margin-top: 1rem;">
+              <button class="btn btn-secondary" onclick="window.open('property-detail.html', '_blank')">
+                <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                View Property
+              </button>
+              <button class="btn btn-secondary" onclick="if(confirm('Are you sure you want to withdraw this inquiry?')) { this.closest('.inquiry-card').remove(); showNotification('Inquiry withdrawn', 'info'); }">
+                <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;"><path d="M6 18L18 6M6 6l12 12"/></svg>
+                Withdraw
+              </button>
+            </div>
+          </div>
+
+          <!-- Inquiry Card 3 - Replied -->
+          <div class="inquiry-card" data-status="replied" id="inquiry-3">
+            <div class="inquiry-card-header">
+              <div class="inquiry-property">
+                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=200&q=80" alt="Property" class="inquiry-property-image">
+                <div class="inquiry-property-info">
+                  <h4>Spacious 2BHK Family Apartment</h4>
+                  <p>
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Mirpur-10, Dhaka
+                  </p>
+                </div>
+              </div>
+              <span class="status-badge replied">Replied</span>
+            </div>
+            
+            <div class="inquiry-meta">
+              <span>📅 Sent: Dec 8, 2024</span>
+              <span>📧 To: Kamal Hossain</span>
+            </div>
+            
+            <div class="inquiry-message">
+              <strong>Your Message:</strong>
+              <p>Is this apartment suitable for a family with two children? Are there any parks or schools nearby?</p>
+            </div>
+            
+            <div class="inquiry-response">
+              <strong>Owner's Response:</strong>
+              <p>Yes, this is perfect for families! There's a playground within the building and two good schools within 1km. The area is very family-friendly and safe. Would you like to visit?</p>
+              <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--gray-600);">Replied on Dec 9, 2024 at 11:20 AM</p>
+            </div>
+            
+            <div id="conversation-3"></div>
+            
+            <div class="inquiry-actions" style="margin-top: 1rem;">
+              <button class="btn btn-secondary" onclick="window.open('property-detail.html', '_blank')">View Property</button>
+              <button class="btn btn-primary" onclick="showReplyForm(3)">Reply Back</button>
+            </div>
+            
+            <div id="reply-form-3" style="display: none; margin-top: 1rem; background: var(--gray-100); padding: 1rem; border-radius: var(--radius-sm);">
+              <strong style="display: block; margin-bottom: 0.5rem;">Your Reply:</strong>
+              <textarea id="reply-text-3" style="width: 100%; min-height: 100px; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); margin-bottom: 0.75rem; resize: vertical;" placeholder="Type your reply here..."></textarea>
+              <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-primary" onclick="sendCustomerReply(3)">Send Reply</button>
+                <button class="btn btn-secondary" onclick="hideReplyForm(3)">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inquiry Card 4 - Pending -->
+          <div class="inquiry-card" data-status="pending">
+            <div class="inquiry-card-header">
+              <div class="inquiry-property">
+                <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=200&q=80" alt="Property" class="inquiry-property-image">
+                <div class="inquiry-property-info">
+                  <h4>Premium Bachelor Suite Near Airport</h4>
+                  <p>
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Uttara Sector 7, Dhaka
+                  </p>
+                </div>
+              </div>
+              <span class="status-badge pending">Pending</span>
+            </div>
+            
+            <div class="inquiry-meta">
+              <span>📅 Sent: Dec 11, 2024</span>
+              <span>📧 To: Rafiq Ahmed</span>
+            </div>
+            
+            <div class="inquiry-message">
+              <strong>Your Message:</strong>
+              <p>What is the minimum lease period? I'm looking for a 6-month rental. Also, is the rent negotiable?</p>
+            </div>
+            
+            <div class="inquiry-actions" style="margin-top: 1rem;">
+              <button class="btn btn-secondary" onclick="window.open('property-detail.html', '_blank')">View Property</button>
+              <button class="btn btn-secondary" onclick="if(confirm('Are you sure you want to withdraw this inquiry?')) { this.closest('.inquiry-card').remove(); showNotification('Inquiry withdrawn', 'info'); }">Withdraw</button>
+            </div>
+          </div>
+
+          <!-- Inquiry Card 5 - Replied -->
+          <div class="inquiry-card" data-status="replied" id="inquiry-5">
+            <div class="inquiry-card-header">
+              <div class="inquiry-property">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=200&q=80" alt="Property" class="inquiry-property-image">
+                <div class="inquiry-property-info">
+                  <h4>Luxury 2BHK in Prime Location</h4>
+                  <p>
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Gulshan-2, Dhaka
+                  </p>
+                </div>
+              </div>
+              <span class="status-badge replied">Replied</span>
+            </div>
+            
+            <div class="inquiry-meta">
+              <span>📅 Sent: Dec 7, 2024</span>
+              <span>📧 To: Sarah Khan</span>
+            </div>
+            
+            <div class="inquiry-message">
+              <strong>Your Message:</strong>
+              <p>Does the apartment come furnished? Also, what are the parking arrangements?</p>
+            </div>
+            
+            <div class="inquiry-response">
+              <strong>Owner's Response:</strong>
+              <p>The apartment is semi-furnished (bed, wardrobe, dining table included). We have covered parking for 2 cars. Additional furniture can be provided upon request. Let me know if you'd like to see it!</p>
+              <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--gray-600);">Replied on Dec 7, 2024 at 6:15 PM</p>
+            </div>
+            
+            <div id="conversation-5"></div>
+            
+            <div class="inquiry-actions" style="margin-top: 1rem;">
+              <button class="btn btn-secondary" onclick="window.open('property-detail.html', '_blank')">View Property</button>
+              <button class="btn btn-primary" onclick="showReplyForm(5)">Reply Back</button>
+            </div>
+            
+            <div id="reply-form-5" style="display: none; margin-top: 1rem; background: var(--gray-100); padding: 1rem; border-radius: var(--radius-sm);">
+              <strong style="display: block; margin-bottom: 0.5rem;">Your Reply:</strong>
+              <textarea id="reply-text-5" style="width: 100%; min-height: 100px; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); margin-bottom: 0.75rem; resize: vertical;" placeholder="Type your reply here..."></textarea>
+              <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-primary" onclick="sendCustomerReply(5)">Send Reply</button>
+                <button class="btn btn-secondary" onclick="hideReplyForm(5)">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State (hidden by default) -->
+        <div id="emptyState" style="display: none; text-align: center; padding: 3rem; color: var(--gray-600);">
+          <svg viewBox="0 0 24 24" style="width: 64px; height: 64px; fill: var(--gray-400); margin: 0 auto 1rem;">
+            <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+          </svg>
+          <h3 style="margin-bottom: 0.5rem;">No inquiries found</h3>
+          <p>Try adjusting your filters or browse properties to send an inquiry</p>
+          <a href="properties.html" class="btn btn-primary" style="margin-top: 1rem;">Browse Properties</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Inquiry Filters
+    document.querySelectorAll('.inquiry-filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Update active button
+        document.querySelectorAll('.inquiry-filter-btn').forEach(b => {
+          b.classList.remove('btn-primary', 'active');
+          b.classList.add('btn-secondary');
+        });
+        this.classList.remove('btn-secondary');
+        this.classList.add('btn-primary', 'active');
+        
+        // Filter inquiries
+        const filter = this.dataset.filter;
+        const cards = document.querySelectorAll('.inquiry-card');
+        let visibleCount = 0;
+        
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.status === filter) {
+            card.style.display = 'block';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // Show/hide empty state
+        document.getElementById('emptyState').style.display = visibleCount === 0 ? 'block' : 'none';
+        document.getElementById('inquiriesList').style.display = visibleCount === 0 ? 'none' : 'block';
+      });
+    });
+    
+    // Reply Back Functionality
+    function showReplyForm(id) {
+      const form = document.getElementById(`reply-form-${id}`);
+      const button = event.target;
+      
+      if (form) {
+        form.style.display = 'block';
+        form.style.animation = 'fadeIn 0.3s ease';
+        button.style.display = 'none';
+        
+        // Focus on textarea
+        const textarea = document.getElementById(`reply-text-${id}`);
+        if (textarea) {
+          setTimeout(() => textarea.focus(), 100);
+        }
+      }
+    }
+    
+    function hideReplyForm(id) {
+      const form = document.getElementById(`reply-form-${id}`);
+      const textarea = document.getElementById(`reply-text-${id}`);
+      const button = document.querySelector(`#inquiry-${id} .btn-primary[onclick="showReplyForm(${id})"]`);
+      
+      if (form) {
+        form.style.display = 'none';
+        if (textarea) textarea.value = '';
+        if (button) button.style.display = '';
+      }
+    }
+    
+    function sendCustomerReply(id) {
+      const textarea = document.getElementById(`reply-text-${id}`);
+      const message = textarea ? textarea.value.trim() : '';
+      
+      if (!message) {
+        alert('Please type a message before sending.');
+        return;
+      }
+      
+      // Get the send button and disable it
+      const sendBtn = event.target;
+      sendBtn.disabled = true;
+      sendBtn.style.opacity = '0.5';
+      sendBtn.style.filter = 'blur(1px)';
+      sendBtn.style.cursor = 'not-allowed';
+      sendBtn.textContent = 'Sending...';
+      sendBtn.classList.add('loading');
+      
+      // Blur the form during submission
+      const form = document.getElementById(`reply-form-${id}`);
+      if (form) {
+        form.style.opacity = '0.7';
+        form.style.filter = 'blur(0.5px)';
+      }
+      
+      // Simulate sending delay
+      setTimeout(() => {
+        // Add the customer's reply to the conversation
+        const conversationDiv = document.getElementById(`conversation-${id}`);
+        if (conversationDiv) {
+          const replyHTML = `
+            <div style="background: rgba(23, 162, 184, 0.1); padding: 1rem; border-radius: var(--radius-sm); margin-top: 1rem; border-left: 3px solid var(--info); animation: fadeIn 0.5s ease;">
+              <strong style="display: block; margin-bottom: 0.5rem; color: var(--info);">✓ Your Reply (Sent just now):</strong>
+              <p>${message}</p>
+            </div>
+          `;
+          conversationDiv.innerHTML += replyHTML;
+        }
+        
+        // Hide the reply form
+        if (form) {
+          form.style.display = 'none';
+          form.style.opacity = '1';
+          form.style.filter = 'none';
+        }
+        
+        // Clear textarea
+        if (textarea) textarea.value = '';
+        
+        // Hide the "Reply Back" button after sending
+        const replyBackBtn = document.querySelector(`#inquiry-${id} .btn-primary[onclick="showReplyForm(${id})"]`);
+        if (replyBackBtn) {
+          replyBackBtn.style.display = 'none';
+        }
+        
+        // Show success notification
+        if (typeof showNotification === 'function') {
+          showNotification('Reply sent successfully!', 'success');
+        }
+        
+        // Save conversation to localStorage
+        saveConversation(id, message);
+        
+        // Add notification
+        if (typeof addNotification === 'function') {
+          addNotification('Reply Sent', 'You replied to the property owner');
+        }
+        
+        // Scroll to the new reply
+        conversationDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 800);
+    }
+    
+    // Save conversation to localStorage
+    function saveConversation(id, message) {
+      const conversations = JSON.parse(localStorage.getItem('customerConversations') || '{}');
+      if (!conversations[id]) {
+        conversations[id] = [];
+      }
+      conversations[id].push({
+        message: message,
+        timestamp: new Date().toISOString(),
+        sender: 'customer'
+      });
+      localStorage.setItem('customerConversations', JSON.stringify(conversations));
+    }
+    
+    // Load saved conversations on page load
+    function loadConversations() {
+      const conversations = JSON.parse(localStorage.getItem('customerConversations') || '{}');
+      Object.keys(conversations).forEach(id => {
+        const conversationDiv = document.getElementById(`conversation-${id}`);
+        const inquiryCard = document.getElementById(`inquiry-${id}`);
+        
+        if (conversationDiv && conversations[id].length > 0) {
+          conversations[id].forEach(conv => {
+            const date = new Date(conv.timestamp);
+            const replyHTML = `
+              <div style="background: rgba(23, 162, 184, 0.1); padding: 1rem; border-radius: var(--radius-sm); margin-top: 1rem; border-left: 3px solid var(--info);">
+                <strong style="display: block; margin-bottom: 0.5rem; color: var(--info);">✓ Your Reply:</strong>
+                <p>${conv.message}</p>
+                <p style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--gray-600);">Sent on ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}</p>
+              </div>
+            `;
+            conversationDiv.innerHTML += replyHTML;
+          });
+          
+          // Hide the Reply Back button if conversation exists
+          const replyBackBtn = inquiryCard ? inquiryCard.querySelector(`.btn-primary[onclick="showReplyForm(${id})"]`) : null;
+          if (replyBackBtn) {
+            replyBackBtn.style.display = 'none';
+          }
+        }
+      });
+    }
+    
+    // Load conversations when page loads
+    loadConversations();
+  </script>
+</body>
+</html>
+

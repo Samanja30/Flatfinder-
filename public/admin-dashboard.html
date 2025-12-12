@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin Dashboard - FlatFinders">
+  <title>Admin Dashboard - FlatFinders</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c9a66b' rx='15' width='100' height='100'/><path fill='white' d='M50 20L20 45v35h25V55h10v25h25V45L50 20z'/></svg>">
+  <style>
+    .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    @media (max-width: 1200px) { .charts-grid { grid-template-columns: 1fr; } }
+    .property-thumb { width: 60px; height: 45px; object-fit: cover; border-radius: var(--radius-sm); }
+    .user-cell { display: flex; align-items: center; gap: 0.75rem; }
+    .user-cell img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="dashboard-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9.5L12 3L21 9.5V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9.5Z" fill="currentColor"/>
+            <path d="M9 22V12H15V22" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="logo-text">FlatFinders</span>
+      </div>
+      
+      <nav class="dashboard-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <a href="admin-dashboard.html" class="dashboard-nav-link active">
+            <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Dashboard
+          </a>
+          <a href="admin-properties.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            Properties
+            <span class="badge">12</span>
+          </a>
+          <a href="admin-users.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            Users
+          </a>
+          <a href="admin-inquiries.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            Inquiries
+            <span class="badge">8</span>
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Reports</span>
+          <a href="admin-analytics.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            Analytics
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Settings</span>
+          <a href="admin-settings.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Settings
+          </a>
+          <a href="index.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="dashboard-search">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" placeholder="Search properties, users...">
+        </div>
+        
+        <div class="dashboard-user">
+          <div class="notifications">
+            <svg viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="badge"></span>
+          </div>
+          <div class="user-dropdown">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Admin" class="user-avatar">
+            <div class="user-info">
+              <h5>Admin User</h5>
+              <p>Administrator</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="dashboard-content">
+        <h1 class="dashboard-title">Dashboard Overview</h1>
+        <p class="dashboard-subtitle">Welcome back! Here's what's happening with FlatFinders today.</p>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue">
+              <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>1,248</h4>
+              <p>Total Properties</p>
+              <span class="stat-change up">↑ 12% from last month</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <svg viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>3,842</h4>
+              <p>Active Users</p>
+              <span class="stat-change up">↑ 8% from last month</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon gold">
+              <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>456</h4>
+              <p>Monthly Inquiries</p>
+              <span class="stat-change up">↑ 24% from last month</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon red">
+              <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>12</h4>
+              <p>Pending Approvals</p>
+              <span class="stat-change down">↓ 3% from last month</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Properties Added (Monthly)</h4>
+              <select id="propertiesYearSelect" style="padding: 0.5rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);">
+                <option value="2025">2025</option>
+                <option value="2024" selected>2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+              </select>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="chart-container">
+                <canvas id="propertiesChart" width="600" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+          
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Property Types</h4>
+              <select id="typesYearSelect" style="padding: 0.5rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);">
+                <option value="2025">2025</option>
+                <option value="2024" selected>2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+              </select>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="chart-container">
+                <canvas id="typesChart" width="300" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Inquiries Trend</h4>
+              <select id="inquiriesYearSelect" style="padding: 0.5rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);">
+                <option value="2025">2025</option>
+                <option value="2024" selected>2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+              </select>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="chart-container">
+                <canvas id="inquiriesChart" width="600" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+          
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Recent Activities</h4>
+            </div>
+            <div class="dashboard-card-body" style="padding: 0;">
+              <div style="padding: 1rem; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                  <div style="width: 8px; height: 8px; background: var(--success); border-radius: 50%; margin-top: 6px;"></div>
+                  <div>
+                    <p style="font-size: 0.9rem; margin-bottom: 0.25rem;">New property listed in Dhanmondi</p>
+                    <span style="font-size: 0.8rem; color: var(--gray-500);">2 minutes ago</span>
+                  </div>
+                </div>
+              </div>
+              <div style="padding: 1rem; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                  <div style="width: 8px; height: 8px; background: var(--info); border-radius: 50%; margin-top: 6px;"></div>
+                  <div>
+                    <p style="font-size: 0.9rem; margin-bottom: 0.25rem;">New user registration: Kamal Hossain</p>
+                    <span style="font-size: 0.8rem; color: var(--gray-500);">15 minutes ago</span>
+                  </div>
+                </div>
+              </div>
+              <div style="padding: 1rem; border-bottom: 1px solid var(--gray-200);">
+                <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                  <div style="width: 8px; height: 8px; background: var(--warning); border-radius: 50%; margin-top: 6px;"></div>
+                  <div>
+                    <p style="font-size: 0.9rem; margin-bottom: 0.25rem;">Property pending review: Uttara</p>
+                    <span style="font-size: 0.8rem; color: var(--gray-500);">1 hour ago</span>
+                  </div>
+                </div>
+              </div>
+              <div style="padding: 1rem;">
+                <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                  <div style="width: 8px; height: 8px; background: var(--primary-gold); border-radius: 50%; margin-top: 6px;"></div>
+                  <div>
+                    <p style="font-size: 0.9rem; margin-bottom: 0.25rem;">Inquiry received for Bachelor Flat</p>
+                    <span style="font-size: 0.8rem; color: var(--gray-500);">3 hours ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Properties -->
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <h4>Recent Property Submissions</h4>
+            <a href="admin-properties.html" class="btn btn-sm btn-secondary">View All</a>
+          </div>
+          <div class="dashboard-card-body" style="padding: 0; overflow-x: auto;">
+            <table class="dashboard-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Owner</th>
+                  <th>Location</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="property-cell">
+                      <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=100&q=80" alt="" class="property-thumb">
+                      <div>
+                        <strong>Modern Bachelor Flat</strong>
+                        <p style="font-size: 0.85rem; color: var(--gray-500);">Bachelor Flat • 1 Bed</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Abdul Rahman</td>
+                  <td>Dhanmondi</td>
+                  <td>৳12,000</td>
+                  <td><span class="status-badge pending">Pending</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn edit" title="Approve"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></button>
+                      <button class="action-btn delete" title="Reject"><svg viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="property-cell">
+                      <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=100&q=80" alt="" class="property-thumb">
+                      <div>
+                        <strong>Spacious 2BHK Apartment</strong>
+                        <p style="font-size: 0.85rem; color: var(--gray-500);">Apartment • 2 Beds</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fatima Khan</td>
+                  <td>Mirpur-10</td>
+                  <td>৳15,000</td>
+                  <td><span class="status-badge approved">Approved</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn edit" title="Edit"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                      <button class="action-btn delete" title="Delete"><svg viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="property-cell">
+                      <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=100&q=80" alt="" class="property-thumb">
+                      <div>
+                        <strong>Cozy Bachelor Room</strong>
+                        <p style="font-size: 0.85rem; color: var(--gray-500);">Bachelor Flat • 1 Bed</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Shahid Alam</td>
+                  <td>Bashundhara</td>
+                  <td>৳8,000</td>
+                  <td><span class="status-badge pending">Pending</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn edit" title="Approve"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></button>
+                      <button class="action-btn delete" title="Reject"><svg viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="property-cell">
+                      <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=100&q=80" alt="" class="property-thumb">
+                      <div>
+                        <strong>Premium Bachelor Suite</strong>
+                        <p style="font-size: 0.85rem; color: var(--gray-500);">Bachelor Flat • 1 Bed</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Rahim Uddin</td>
+                  <td>Uttara</td>
+                  <td>৳10,000</td>
+                  <td><span class="status-badge approved">Approved</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn edit" title="Edit"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                      <button class="action-btn delete" title="Delete"><svg viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recent Users -->
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <h4>Recent Users</h4>
+            <a href="admin-users.html" class="btn btn-sm btn-secondary">View All</a>
+          </div>
+          <div class="dashboard-card-body" style="padding: 0; overflow-x: auto;">
+            <table class="dashboard-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Joined</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="user-cell">
+                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="">
+                      <span>Rafiq Ahmed</span>
+                    </div>
+                  </td>
+                  <td>rafiq@email.com</td>
+                  <td>Customer</td>
+                  <td>Dec 10, 2025</td>
+                  <td><span class="status-badge approved">Active</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn edit" title="Edit"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                      <button class="action-btn delete" title="Suspend"><svg viewBox="0 0 24 24"><path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="user-cell">
+                      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="">
+                      <span>Fatima Khan</span>
+                    </div>
+                  </td>
+                  <td>fatima@email.com</td>
+                  <td>Property Owner</td>
+                  <td>Dec 8, 2025</td>
+                  <td><span class="status-badge approved">Active</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn edit" title="Edit"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                      <button class="action-btn delete" title="Suspend"><svg viewBox="0 0 24 24"><path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="user-cell">
+                      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="">
+                      <span>Kamal Hossain</span>
+                    </div>
+                  </td>
+                  <td>kamal@email.com</td>
+                  <td>Customer</td>
+                  <td>Dec 5, 2025</td>
+                  <td><span class="status-badge approved">Active</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn edit" title="Edit"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                      <button class="action-btn delete" title="Suspend"><svg viewBox="0 0 24 24"><path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+

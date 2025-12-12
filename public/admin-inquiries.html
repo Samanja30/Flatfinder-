@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin Inquiries Management - FlatFinders">
+  <title>Inquiries Management - Admin Dashboard</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c9a66b' rx='15' width='100' height='100'/><path fill='white' d='M50 20L20 45v35h25V55h10v25h25V45L50 20z'/></svg>">
+  <style>
+    .inquiry-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1rem; transition: all 0.3s ease; }
+    .inquiry-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .inquiry-card.new { border-left: 4px solid var(--primary-gold); }
+    .inquiry-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+    .inquiry-user { display: flex; align-items: center; gap: 1rem; }
+    .inquiry-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+    .inquiry-info h4 { margin: 0 0 0.25rem; font-size: 1rem; }
+    .inquiry-info p { margin: 0; font-size: 0.85rem; color: var(--gray-500); }
+    .inquiry-status { padding: 0.35rem 0.75rem; font-size: 0.75rem; border-radius: 20px; font-weight: 500; }
+    .inquiry-status.new { background: rgba(201, 166, 107, 0.15); color: var(--primary-gold); }
+    .inquiry-status.replied { background: rgba(40, 167, 69, 0.15); color: var(--success); }
+    .inquiry-status.pending { background: rgba(255, 193, 7, 0.15); color: #856404; }
+    .inquiry-property { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--gray-50); border-radius: var(--radius-sm); margin: 1rem 0; }
+    .inquiry-property img { width: 80px; height: 60px; object-fit: cover; border-radius: var(--radius-sm); }
+    .inquiry-property-info h5 { margin: 0 0 0.25rem; font-size: 0.95rem; }
+    .inquiry-property-info p { margin: 0; font-size: 0.85rem; color: var(--gray-600); }
+    .inquiry-message { padding: 1rem; background: var(--gray-50); border-radius: var(--radius-sm); margin-bottom: 1rem; }
+    .inquiry-message p { margin: 0; font-style: italic; color: var(--gray-700); }
+    .inquiry-actions { display: flex; gap: 0.5rem; }
+    .filters-bar { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; align-items: center; }
+    .filters-bar select, .filters-bar input { padding: 0.6rem 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-md); font-size: 0.9rem; }
+    .reply-form { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200); }
+    .reply-form.active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="dashboard-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9.5L12 3L21 9.5V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9.5Z" fill="currentColor"/>
+            <path d="M9 22V12H15V22" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="logo-text">FlatFinders</span>
+      </div>
+      
+      <nav class="dashboard-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <a href="admin-dashboard.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Dashboard
+          </a>
+          <a href="admin-properties.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            Properties
+            <span class="badge">12</span>
+          </a>
+          <a href="admin-users.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            Users
+          </a>
+          <a href="admin-inquiries.html" class="dashboard-nav-link active">
+            <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            Inquiries
+            <span class="badge">8</span>
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Reports</span>
+          <a href="admin-analytics.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            Analytics
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Settings</span>
+          <a href="admin-settings.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Settings
+          </a>
+          <a href="index.html" class="dashboard-nav-link" onclick="logout(); return false;">
+            <svg viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="dashboard-search">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" placeholder="Search inquiries...">
+        </div>
+        
+        <div class="dashboard-user">
+          <div class="notifications">
+            <svg viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="badge"></span>
+          </div>
+          <div class="user-dropdown">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Admin" class="user-avatar">
+            <div class="user-info">
+              <h5>Admin User</h5>
+              <p>Administrator</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="dashboard-content">
+        <h1 class="dashboard-title">Inquiries Management</h1>
+        <p class="dashboard-subtitle">View and respond to property inquiries from customers</p>
+
+        <!-- Stats -->
+        <div class="stats-grid" style="margin-bottom: 2rem;">
+          <div class="stat-card">
+            <div class="stat-icon gold">
+              <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>156</h4>
+              <p>Total Inquiries</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon blue">
+              <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>8</h4>
+              <p>New (Today)</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>142</h4>
+              <p>Replied</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red">
+              <svg viewBox="0 0 24 24"><path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>6</h4>
+              <p>Pending</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="dashboard-card" style="margin-bottom: 1.5rem;">
+          <div class="dashboard-card-body">
+            <div class="filters-bar">
+              <input type="search" placeholder="Search by name, property, email..." id="inquirySearch" style="min-width: 250px;">
+              <select id="statusFilter">
+                <option value="">All Status</option>
+                <option value="new">New</option>
+                <option value="pending">Pending</option>
+                <option value="replied">Replied</option>
+              </select>
+              <select id="dateFilter">
+                <option value="">All Time</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inquiries List -->
+        <div id="inquiriesList">
+          <!-- Inquiry 1 - New -->
+          <div class="inquiry-card new" data-status="new">
+            <div class="inquiry-header">
+              <div class="inquiry-user">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Rafiq Ahmed" class="inquiry-avatar">
+                <div class="inquiry-info">
+                  <h4>Rafiq Ahmed</h4>
+                  <p>rafiq.ahmed@email.com • +880 1712-345678</p>
+                </div>
+              </div>
+              <span class="inquiry-status new">New</span>
+            </div>
+            
+            <div class="inquiry-property">
+              <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=200&q=80" alt="Modern Bachelor Flat">
+              <div class="inquiry-property-info">
+                <h5>Modern Bachelor Flat with Balcony</h5>
+                <p>Dhanmondi, Dhaka • ৳12,000/month</p>
+              </div>
+            </div>
+            
+            <div class="inquiry-message">
+              <p>"I'm very interested in this property. Is it still available? I would like to schedule a visit this weekend if possible. Also, is the rent negotiable?"</p>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.85rem; color: var(--gray-500);">2 hours ago</span>
+              <div class="inquiry-actions">
+                <button class="btn btn-sm btn-primary" onclick="toggleReplyForm(this)">Reply</button>
+                <button class="btn btn-sm btn-secondary" onclick="markAsReplied(this)">Mark as Replied</button>
+              </div>
+            </div>
+            
+            <div class="reply-form">
+              <textarea class="form-control" rows="3" placeholder="Type your reply..."></textarea>
+              <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem; justify-content: flex-end;">
+                <button class="btn btn-sm btn-secondary" onclick="toggleReplyForm(this)">Cancel</button>
+                <button class="btn btn-sm btn-primary" onclick="sendReply(this)">Send Reply</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inquiry 2 - Pending -->
+          <div class="inquiry-card" data-status="pending">
+            <div class="inquiry-header">
+              <div class="inquiry-user">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Fatima Begum" class="inquiry-avatar">
+                <div class="inquiry-info">
+                  <h4>Fatima Begum</h4>
+                  <p>fatima.begum@email.com • +880 1812-456789</p>
+                </div>
+              </div>
+              <span class="inquiry-status pending">Pending</span>
+            </div>
+            
+            <div class="inquiry-property">
+              <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=200&q=80" alt="Spacious 2BHK Apartment">
+              <div class="inquiry-property-info">
+                <h5>Spacious 2BHK Family Apartment</h5>
+                <p>Mirpur-10, Dhaka • ৳15,000/month</p>
+              </div>
+            </div>
+            
+            <div class="inquiry-message">
+              <p>"What's the advance payment required? Is gas and electricity included in the rent? We are a family of 4 looking for a long-term rental."</p>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.85rem; color: var(--gray-500);">5 hours ago</span>
+              <div class="inquiry-actions">
+                <button class="btn btn-sm btn-primary" onclick="toggleReplyForm(this)">Reply</button>
+                <button class="btn btn-sm btn-secondary" onclick="markAsReplied(this)">Mark as Replied</button>
+              </div>
+            </div>
+            
+            <div class="reply-form">
+              <textarea class="form-control" rows="3" placeholder="Type your reply..."></textarea>
+              <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem; justify-content: flex-end;">
+                <button class="btn btn-sm btn-secondary" onclick="toggleReplyForm(this)">Cancel</button>
+                <button class="btn btn-sm btn-primary" onclick="sendReply(this)">Send Reply</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inquiry 3 - Replied -->
+          <div class="inquiry-card" data-status="replied">
+            <div class="inquiry-header">
+              <div class="inquiry-user">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Kamal Hossain" class="inquiry-avatar">
+                <div class="inquiry-info">
+                  <h4>Kamal Hossain</h4>
+                  <p>kamal.hossain@email.com • +880 1912-567890</p>
+                </div>
+              </div>
+              <span class="inquiry-status replied">Replied</span>
+            </div>
+            
+            <div class="inquiry-property">
+              <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=200&q=80" alt="Cozy Bachelor Room">
+              <div class="inquiry-property-info">
+                <h5>Cozy Bachelor Room Near AIUB</h5>
+                <p>Bashundhara R/A, Dhaka • ৳8,000/month</p>
+              </div>
+            </div>
+            
+            <div class="inquiry-message">
+              <p>"Is this room suitable for students? Is there Wi-Fi available? How far is it from AIUB campus?"</p>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.85rem; color: var(--gray-500);">1 day ago • Replied 20 hours ago</span>
+              <div class="inquiry-actions">
+                <button class="btn btn-sm btn-secondary" onclick="toggleReplyForm(this)">View Reply</button>
+              </div>
+            </div>
+            
+            <div class="reply-form">
+              <div style="padding: 1rem; background: rgba(40, 167, 69, 0.1); border-radius: var(--radius-sm); margin-bottom: 0.75rem;">
+                <p style="margin: 0; font-size: 0.9rem;"><strong>Your Reply:</strong> Yes, this room is perfect for students! Wi-Fi is included in the rent. The property is just 10 minutes walking distance from AIUB campus. Feel free to schedule a visit anytime.</p>
+              </div>
+              <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                <button class="btn btn-sm btn-secondary" onclick="toggleReplyForm(this)">Close</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inquiry 4 - New -->
+          <div class="inquiry-card new" data-status="new">
+            <div class="inquiry-header">
+              <div class="inquiry-user">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" alt="Nasir Uddin" class="inquiry-avatar">
+                <div class="inquiry-info">
+                  <h4>Nasir Uddin</h4>
+                  <p>nasir.uddin@email.com • +880 1612-678901</p>
+                </div>
+              </div>
+              <span class="inquiry-status new">New</span>
+            </div>
+            
+            <div class="inquiry-property">
+              <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=200&q=80" alt="Premium Bachelor Suite">
+              <div class="inquiry-property-info">
+                <h5>Premium Bachelor Suite Near Airport</h5>
+                <p>Uttara Sector 7, Dhaka • ৳10,000/month</p>
+              </div>
+            </div>
+            
+            <div class="inquiry-message">
+              <p>"I work at the airport and this location seems perfect. Is parking available? When can I move in?"</p>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.85rem; color: var(--gray-500);">4 hours ago</span>
+              <div class="inquiry-actions">
+                <button class="btn btn-sm btn-primary" onclick="toggleReplyForm(this)">Reply</button>
+                <button class="btn btn-sm btn-secondary" onclick="markAsReplied(this)">Mark as Replied</button>
+              </div>
+            </div>
+            
+            <div class="reply-form">
+              <textarea class="form-control" rows="3" placeholder="Type your reply..."></textarea>
+              <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem; justify-content: flex-end;">
+                <button class="btn btn-sm btn-secondary" onclick="toggleReplyForm(this)">Cancel</button>
+                <button class="btn btn-sm btn-primary" onclick="sendReply(this)">Send Reply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" style="margin-top: 1.5rem;">
+          <button disabled>&laquo; Previous</button>
+          <button class="active">1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>Next &raquo;</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Toggle reply form
+    function toggleReplyForm(btn) {
+      const card = btn.closest('.inquiry-card');
+      const form = card.querySelector('.reply-form');
+      form.classList.toggle('active');
+    }
+
+    // Mark as replied
+    function markAsReplied(btn) {
+      const card = btn.closest('.inquiry-card');
+      const statusBadge = card.querySelector('.inquiry-status');
+      statusBadge.textContent = 'Replied';
+      statusBadge.className = 'inquiry-status replied';
+      card.classList.remove('new');
+      card.dataset.status = 'replied';
+      showNotification('Inquiry marked as replied', 'success');
+    }
+
+    // Send reply
+    function sendReply(btn) {
+      const card = btn.closest('.inquiry-card');
+      const textarea = card.querySelector('.reply-form textarea');
+      
+      if (textarea.value.trim().length < 5) {
+        showNotification('Please enter a valid reply', 'error');
+        return;
+      }
+      
+      const statusBadge = card.querySelector('.inquiry-status');
+      statusBadge.textContent = 'Replied';
+      statusBadge.className = 'inquiry-status replied';
+      card.classList.remove('new');
+      card.dataset.status = 'replied';
+      
+      toggleReplyForm(btn);
+      showNotification('Reply sent successfully!', 'success');
+    }
+
+    // Filter functionality
+    document.getElementById('inquirySearch')?.addEventListener('input', filterInquiries);
+    document.getElementById('statusFilter')?.addEventListener('change', filterInquiries);
+    document.getElementById('dateFilter')?.addEventListener('change', filterInquiries);
+
+    function filterInquiries() {
+      const search = document.getElementById('inquirySearch').value.toLowerCase();
+      const status = document.getElementById('statusFilter').value.toLowerCase();
+
+      document.querySelectorAll('.inquiry-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const cardStatus = card.dataset.status || '';
+        
+        let show = true;
+        if (search && !text.includes(search)) show = false;
+        if (status && cardStatus !== status) show = false;
+
+        card.style.display = show ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
+

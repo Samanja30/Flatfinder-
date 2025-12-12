@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FlatFinders - Find your perfect bachelor flat or rental property in Bangladesh. Search thousands of properties including Bachelor Flats, Apartments, and more.">
+  <title>FlatFinders - Find Your Perfect Bachelor Flat Today</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c9a66b' rx='15' width='100' height='100'/><path fill='white' d='M50 20L20 45v35h25V55h10v25h25V45L50 20z'/></svg>">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9.5L12 3L21 9.5V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9.5Z" fill="currentColor"/>
+            <path d="M9 22V12H15V22" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="logo-text">FlatFinders</span>
+      </a>
+      
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="properties.html" class="nav-link">Properties</a></li>
+        <li><a href="post-property.html" class="nav-link">Post Property</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      
+      <div class="navbar-actions">
+        <a href="login.html" class="btn btn-secondary">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </div>
+      
+      <button class="navbar-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-background">
+      <div class="hero-overlay"></div>
+    </div>
+    
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          #1 Property Rental Platform
+        </div>
+        
+        <h1 class="hero-title">
+          <span>Find Your Perfect</span>
+          <span>Bachelor Flat Today</span>
+        </h1>
+        
+        <p class="hero-description">
+          Discover thousands of rental properties including Bachelor Flats, 
+          Apartments, and more. No roommates, no shared housing - just your 
+          perfect space.
+        </p>
+        
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number">5,000+</div>
+            <div class="stat-label">Properties</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">2,500+</div>
+            <div class="stat-label">Happy Renters</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Locations</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-image-placeholder"></div>
+    </div>
+    
+    <!-- Search Box -->
+    <div class="hero-search">
+      <form class="search-form" action="properties.html" method="GET">
+        <div class="search-group">
+          <label for="location">Location</label>
+          <select id="location" name="location">
+            <option value="">All Locations</option>
+            <option value="dhanmondi">Dhanmondi</option>
+            <option value="mirpur">Mirpur</option>
+            <option value="bashundhara">Bashundhara</option>
+            <option value="uttara">Uttara</option>
+            <option value="gulshan">Gulshan</option>
+            <option value="banani">Banani</option>
+            <option value="mohammadpur">Mohammadpur</option>
+            <option value="tejgaon">Tejgaon</option>
+          </select>
+        </div>
+        
+        <div class="search-group">
+          <label for="propertyType">Property Type</label>
+          <select id="propertyType" name="type">
+            <option value="">All Types</option>
+            <option value="bachelor">Bachelor Flat</option>
+            <option value="apartment">Apartment</option>
+            <option value="house">House</option>
+            <option value="studio">Studio</option>
+            <option value="sublet">Sublet</option>
+          </select>
+        </div>
+        
+        <div class="search-group">
+          <label for="maxPrice">Max Price (BDT)</label>
+          <select id="maxPrice" name="maxPrice">
+            <option value="">Any Price</option>
+            <option value="7000">Up to ৳7,000</option>
+            <option value="10000">Up to ৳10,000</option>
+            <option value="12000">Up to ৳12,000</option>
+            <option value="15000">Up to ৳15,000</option>
+            <option value="20000">Up to ৳20,000</option>
+            <option value="25000">Up to ৳25,000</option>
+          </select>
+        </div>
+        
+        <div class="search-group">
+          <label for="bedrooms">Bedrooms</label>
+          <select id="bedrooms" name="bedrooms">
+            <option value="">Any</option>
+            <option value="1">1 Bedroom</option>
+            <option value="2">2 Bedrooms</option>
+            <option value="3">3 Bedrooms</option>
+            <option value="4">4+ Bedrooms</option>
+          </select>
+        </div>
+        
+        <div class="search-checkbox">
+          <input type="checkbox" id="bachelorOnly" name="bachelorOnly" value="true">
+          <label for="bachelorOnly">Bachelor Flats Only</label>
+        </div>
+        
+        <button type="submit" class="search-btn">
+          <svg viewBox="0 0 24 24"><path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          Search Properties
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Featured Properties -->
+  <section class="featured-properties">
+    <div class="container">
+      <div class="featured-header">
+        <div>
+          <h2>Featured Properties</h2>
+          <p>Explore our handpicked selection of premium rental properties</p>
+        </div>
+        <a href="properties.html" class="btn btn-secondary">View All Properties</a>
+      </div>
+      
+      <div class="property-grid">
+        <!-- Property Card 1 -->
+        <div class="property-card" data-id="1" data-price="12000" data-location="dhanmondi" data-type="bachelor" data-bedrooms="1" data-bachelor="true" data-amenities="wifi,ac">
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80" alt="Bachelor Flat in Dhanmondi">
+            <span class="property-badge bachelor">Bachelor Flat</span>
+            <button class="property-favorite" aria-label="Add to favorites">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="property-content">
+            <div class="property-price">৳12,000 <span>/month</span></div>
+            <h3 class="property-title">Modern Bachelor Flat with Balcony</h3>
+            <div class="property-location">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Dhanmondi, Dhaka
+            </div>
+            <div class="property-features">
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                1 Bed
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                1 Bath
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                450 sqft
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Card 2 -->
+        <div class="property-card" data-id="2" data-price="15000" data-location="mirpur" data-type="apartment" data-bedrooms="2" data-bachelor="false" data-amenities="wifi,ac,parking">
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80" alt="2BHK Apartment in Mirpur">
+            <span class="property-badge">For Rent</span>
+            <button class="property-favorite" aria-label="Add to favorites">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="property-content">
+            <div class="property-price">৳15,000 <span>/month</span></div>
+            <h3 class="property-title">Spacious 2BHK Family Apartment</h3>
+            <div class="property-location">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Mirpur-10, Dhaka
+            </div>
+            <div class="property-features">
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                2 Beds
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                2 Bath
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                850 sqft
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Card 3 -->
+        <div class="property-card" data-id="3" data-price="8000" data-location="bashundhara" data-type="bachelor" data-bedrooms="1" data-bachelor="true" data-amenities="wifi">
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80" alt="Bachelor Flat in Bashundhara">
+            <span class="property-badge bachelor">Bachelor Flat</span>
+            <button class="property-favorite" aria-label="Add to favorites">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="property-content">
+            <div class="property-price">৳8,000 <span>/month</span></div>
+            <h3 class="property-title">Cozy Bachelor Room Near AIUB</h3>
+            <div class="property-location">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Bashundhara R/A, Dhaka
+            </div>
+            <div class="property-features">
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                1 Bed
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                1 Bath
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                350 sqft
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Card 4 -->
+        <div class="property-card" data-id="4" data-price="10000" data-location="uttara" data-type="bachelor" data-bedrooms="1" data-bachelor="true" data-amenities="wifi,ac">
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&q=80" alt="Bachelor Flat in Uttara">
+            <span class="property-badge bachelor">Bachelor Flat</span>
+            <button class="property-favorite" aria-label="Add to favorites">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="property-content">
+            <div class="property-price">৳10,000 <span>/month</span></div>
+            <h3 class="property-title">Premium Bachelor Suite Near Airport</h3>
+            <div class="property-location">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Uttara Sector 7, Dhaka
+            </div>
+            <div class="property-features">
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                1 Bed
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                1 Bath
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                400 sqft
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Card 5 -->
+        <div class="property-card" data-id="5" data-price="18000" data-location="gulshan" data-type="apartment" data-bedrooms="2" data-bachelor="false" data-amenities="wifi,ac,parking,gym">
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80" alt="Luxury Apartment in Gulshan">
+            <span class="property-badge">Premium</span>
+            <button class="property-favorite" aria-label="Add to favorites">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="property-content">
+            <div class="property-price">৳18,000 <span>/month</span></div>
+            <h3 class="property-title">Luxury 2BHK in Prime Location</h3>
+            <div class="property-location">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Gulshan-2, Dhaka
+            </div>
+            <div class="property-features">
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                2 Beds
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                2 Bath
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                1000 sqft
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Card 6 -->
+        <div class="property-card" data-id="6" data-price="7000" data-location="mohammadpur" data-type="bachelor" data-bedrooms="1" data-bachelor="true" data-amenities="wifi">
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&q=80" alt="Affordable Bachelor Flat">
+            <span class="property-badge bachelor">Bachelor Flat</span>
+            <button class="property-favorite" aria-label="Add to favorites">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="property-content">
+            <div class="property-price">৳7,000 <span>/month</span></div>
+            <h3 class="property-title">Budget-Friendly Bachelor Room</h3>
+            <div class="property-location">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Mohammadpur, Dhaka
+            </div>
+            <div class="property-features">
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                1 Bed
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                1 Bath
+              </span>
+              <span class="feature">
+                <svg viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                300 sqft
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Property Types -->
+  <section class="property-types section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Browse by Property Type</h2>
+        <p>Find the perfect space that matches your lifestyle and budget</p>
+      </div>
+      
+      <div class="types-grid">
+        <a href="properties.html?type=bachelor" class="type-card">
+          <img src="https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=600&q=80" alt="Bachelor Flats">
+          <div class="type-overlay">
+            <h4>Bachelor Flats</h4>
+            <p>150+ Properties</p>
+          </div>
+        </a>
+        
+        <a href="properties.html?type=apartment" class="type-card">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Apartments">
+          <div class="type-overlay">
+            <h4>Apartments</h4>
+            <p>280+ Properties</p>
+          </div>
+        </a>
+        
+        <a href="properties.html?type=house" class="type-card">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80" alt="Houses">
+          <div class="type-overlay">
+            <h4>Houses</h4>
+            <p>95+ Properties</p>
+          </div>
+        </a>
+        
+        <a href="properties.html?type=studio" class="type-card">
+          <img src="https://images.unsplash.com/photo-1502672023488-70e25813eb80?w=600&q=80" alt="Studio">
+          <div class="type-overlay">
+            <h4>Studio</h4>
+            <p>65+ Properties</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2>How It Works</h2>
+        <p>Finding your perfect rental has never been easier</p>
+      </div>
+      
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </div>
+          <div class="step-number">01</div>
+          <h4>Search Properties</h4>
+          <p>Browse through our extensive collection of verified properties using powerful filters</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          </div>
+          <div class="step-number">02</div>
+          <h4>View Details</h4>
+          <p>Explore detailed property information, photos, amenities, and neighborhood insights</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          </div>
+          <div class="step-number">03</div>
+          <h4>Contact Owner</h4>
+          <p>Connect directly with property owners to schedule visits and ask questions</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="step-number">04</div>
+          <h4>Move In</h4>
+          <p>Finalize the deal and move into your new home with confidence</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Our Customers Say</h2>
+        <p>Real stories from people who found their perfect home through FlatFinders</p>
+      </div>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          </div>
+          <p class="testimonial-text">"Found my perfect bachelor flat within a week! The filtering system made it so easy to find exactly what I was looking for. Highly recommend FlatFinders to all students!"</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Rafiq Ahmed" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-name">Rafiq Ahmed</div>
+              <div class="testimonial-role">Student, NSU</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          </div>
+          <p class="testimonial-text">"As a property owner, FlatFinders has been amazing for getting quality tenants. The platform is professional and the admin team is very responsive."</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Fatima Khan" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-name">Fatima Khan</div>
+              <div class="testimonial-role">Property Owner</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          </div>
+          <p class="testimonial-text">"Relocated from Chittagong to Dhaka for work. FlatFinders helped me find an affordable apartment near my office. The process was smooth and transparent."</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Kamal Hossain" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-name">Kamal Hossain</div>
+              <div class="testimonial-role">Software Engineer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Find Your Perfect Home?</h2>
+        <p>Join thousands of happy renters who found their ideal space through FlatFinders. Start your search today!</p>
+        <div class="cta-buttons">
+          <a href="properties.html" class="btn btn-primary btn-lg">Browse Properties</a>
+          <a href="post-property.html" class="btn btn-outline-white btn-lg">List Your Property</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <span class="logo-text">FlatFinders</span>
+          </div>
+          <p class="footer-description">
+            Your trusted partner in finding the perfect rental property. We connect renters with verified property owners across Bangladesh.
+          </p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+              <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h5>Quick Links</h5>
+          <div class="footer-links">
+            <a href="properties.html">Browse Properties</a>
+            <a href="post-property.html">List Your Property</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h5>Property Types</h5>
+          <div class="footer-links">
+            <a href="properties.html?type=bachelor">Bachelor Flats</a>
+            <a href="properties.html?type=apartment">Apartments</a>
+            <a href="properties.html?type=house">Houses</a>
+            <a href="properties.html?type=studio">Studio</a>
+            <a href="properties.html?type=sublet">Sublet</a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h5>Popular Locations</h5>
+          <div class="footer-links">
+            <a href="properties.html?location=dhanmondi">Dhanmondi</a>
+            <a href="properties.html?location=mirpur">Mirpur</a>
+            <a href="properties.html?location=bashundhara">Bashundhara</a>
+            <a href="properties.html?location=uttara">Uttara</a>
+            <a href="properties.html?location=gulshan">Gulshan</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 FlatFinders. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+

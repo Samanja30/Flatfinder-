@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin Settings - FlatFinders">
+  <title>Settings - Admin Dashboard</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c9a66b' rx='15' width='100' height='100'/><path fill='white' d='M50 20L20 45v35h25V55h10v25h25V45L50 20z'/></svg>">
+  <style>
+    .settings-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--gray-200); margin-bottom: 2rem; }
+    .settings-tab { padding: 1rem 1.5rem; background: none; border: none; cursor: pointer; font-size: 0.95rem; color: var(--gray-600); position: relative; transition: all 0.3s ease; }
+    .settings-tab:hover { color: var(--primary-gold); }
+    .settings-tab.active { color: var(--primary-gold); font-weight: 600; }
+    .settings-tab.active::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background: var(--primary-gold); }
+    .settings-panel { display: none; }
+    .settings-panel.active { display: block; }
+    .setting-group { margin-bottom: 2rem; }
+    .setting-group h4 { margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--gray-200); }
+    .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--gray-100); }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-info h5 { margin: 0 0 0.25rem; font-size: 0.95rem; }
+    .setting-info p { margin: 0; font-size: 0.85rem; color: var(--gray-500); }
+    .toggle-switch { position: relative; width: 50px; height: 26px; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; cursor: pointer; inset: 0; background: var(--gray-300); border-radius: 26px; transition: 0.3s; }
+    .toggle-slider::before { content: ''; position: absolute; height: 20px; width: 20px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
+    .toggle-switch input:checked + .toggle-slider { background: var(--primary-gold); }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(24px); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
+    .color-preview { width: 40px; height: 40px; border-radius: var(--radius-sm); border: 2px solid var(--gray-300); cursor: pointer; }
+    .danger-zone { background: rgba(220, 53, 69, 0.05); border: 1px solid rgba(220, 53, 69, 0.2); border-radius: var(--radius-md); padding: 1.5rem; }
+    .danger-zone h4 { color: var(--error); margin: 0 0 1rem; }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="dashboard-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9.5L12 3L21 9.5V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9.5Z" fill="currentColor"/>
+            <path d="M9 22V12H15V22" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="logo-text">FlatFinders</span>
+      </div>
+      
+      <nav class="dashboard-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <a href="admin-dashboard.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Dashboard
+          </a>
+          <a href="admin-properties.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            Properties
+          </a>
+          <a href="admin-users.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            Users
+          </a>
+          <a href="admin-inquiries.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            Inquiries
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Reports</span>
+          <a href="admin-analytics.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            Analytics
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Settings</span>
+          <a href="admin-settings.html" class="dashboard-nav-link active">
+            <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Settings
+          </a>
+          <a href="index.html" class="dashboard-nav-link" onclick="logout(); return false;">
+            <svg viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="dashboard-search">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" placeholder="Search settings...">
+        </div>
+        
+        <div class="dashboard-user">
+          <div class="notifications">
+            <svg viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="badge"></span>
+          </div>
+          <div class="user-dropdown">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Admin" class="user-avatar">
+            <div class="user-info">
+              <h5>Admin User</h5>
+              <p>Administrator</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="dashboard-content">
+        <h1 class="dashboard-title">Platform Settings</h1>
+        <p class="dashboard-subtitle">Configure your platform preferences and options</p>
+
+        <!-- Settings Tabs -->
+        <div class="settings-tabs">
+          <button class="settings-tab active" onclick="showSettingsTab('general')">General</button>
+          <button class="settings-tab" onclick="showSettingsTab('notifications')">Notifications</button>
+          <button class="settings-tab" onclick="showSettingsTab('security')">Security</button>
+          <button class="settings-tab" onclick="showSettingsTab('appearance')">Appearance</button>
+          <button class="settings-tab" onclick="showSettingsTab('advanced')">Advanced</button>
+        </div>
+
+        <!-- General Settings -->
+        <div class="settings-panel active" id="general-panel">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>General Settings</h4>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="setting-group">
+                <h4>Site Information</h4>
+                <form>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label>Site Name</label>
+                      <input type="text" class="form-control" value="FlatFinders">
+                    </div>
+                    <div class="form-group">
+                      <label>Tagline</label>
+                      <input type="text" class="form-control" value="Find Your Perfect Bachelor Flat Today">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Site Description</label>
+                    <textarea class="form-control" rows="3">FlatFinders - Your trusted partner in finding the perfect rental property in Bangladesh.</textarea>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label>Contact Email</label>
+                      <input type="email" class="form-control" value="support@flatfinders.com">
+                    </div>
+                    <div class="form-group">
+                      <label>Contact Phone</label>
+                      <input type="tel" class="form-control" value="+880 1700-000000">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="setting-group">
+                <h4>Property Settings</h4>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Require Admin Approval</h5>
+                    <p>All new property listings require admin approval before going live</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Allow Property Reviews</h5>
+                    <p>Enable customers to leave reviews on properties</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Max Images per Property</h5>
+                    <p>Maximum number of images allowed per listing</p>
+                  </div>
+                  <select class="form-control" style="width: auto;">
+                    <option>5</option>
+                    <option selected>10</option>
+                    <option>15</option>
+                    <option>20</option>
+                  </select>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" onclick="showNotification('Settings saved successfully!', 'success')">Save Changes</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notifications Settings -->
+        <div class="settings-panel" id="notifications-panel">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Notification Settings</h4>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="setting-group">
+                <h4>Email Notifications</h4>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>New Property Submissions</h5>
+                    <p>Receive email when a new property is submitted for review</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>New User Registrations</h5>
+                    <p>Receive email when a new user registers</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>New Inquiries</h5>
+                    <p>Receive email for new property inquiries</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Weekly Reports</h5>
+                    <p>Receive weekly summary of platform activity</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="setting-group">
+                <h4>System Notifications</h4>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Browser Notifications</h5>
+                    <p>Show browser notifications for important events</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Sound Alerts</h5>
+                    <p>Play sound for new notifications</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" onclick="showNotification('Notification settings saved!', 'success')">Save Changes</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security Settings -->
+        <div class="settings-panel" id="security-panel">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Security Settings</h4>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="setting-group">
+                <h4>Authentication</h4>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Two-Factor Authentication</h5>
+                    <p>Add an extra layer of security to admin accounts</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Session Timeout</h5>
+                    <p>Automatically log out after inactivity</p>
+                  </div>
+                  <select class="form-control" style="width: auto;">
+                    <option>15 minutes</option>
+                    <option selected>30 minutes</option>
+                    <option>1 hour</option>
+                    <option>4 hours</option>
+                  </select>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Password Requirements</h5>
+                    <p>Minimum password strength for users</p>
+                  </div>
+                  <select class="form-control" style="width: auto;">
+                    <option>Basic (6+ characters)</option>
+                    <option selected>Medium (8+ with numbers)</option>
+                    <option>Strong (8+ with special chars)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="setting-group">
+                <h4>Change Admin Password</h4>
+                <form>
+                  <div class="form-group">
+                    <label>Current Password</label>
+                    <input type="password" class="form-control" placeholder="Enter current password">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label>New Password</label>
+                      <input type="password" class="form-control" placeholder="Enter new password">
+                    </div>
+                    <div class="form-group">
+                      <label>Confirm Password</label>
+                      <input type="password" class="form-control" placeholder="Confirm new password">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <button class="btn btn-primary" onclick="showNotification('Security settings updated!', 'success')">Save Changes</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Appearance Settings -->
+        <div class="settings-panel" id="appearance-panel">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Appearance Settings</h4>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="setting-group">
+                <h4>Theme Colors</h4>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Primary Color</label>
+                    <div style="display: flex; gap: 0.5rem; align-items: center;">
+                      <input type="color" value="#c9a66b" class="color-preview">
+                      <input type="text" class="form-control" value="#c9a66b" style="width: 120px;">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Secondary Color</label>
+                    <div style="display: flex; gap: 0.5rem; align-items: center;">
+                      <input type="color" value="#1a1a2e" class="color-preview">
+                      <input type="text" class="form-control" value="#1a1a2e" style="width: 120px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="setting-group">
+                <h4>Display Options</h4>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Dark Mode</h5>
+                    <p>Enable dark mode for the admin dashboard</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Compact View</h5>
+                    <p>Use smaller padding and margins</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Properties per Page</h5>
+                    <p>Number of items to show in listings</p>
+                  </div>
+                  <select class="form-control" style="width: auto;">
+                    <option>10</option>
+                    <option selected>20</option>
+                    <option>50</option>
+                    <option>100</option>
+                  </select>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" onclick="showNotification('Appearance settings saved!', 'success')">Save Changes</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Advanced Settings -->
+        <div class="settings-panel" id="advanced-panel">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Advanced Settings</h4>
+            </div>
+            <div class="dashboard-card-body">
+              <div class="setting-group">
+                <h4>Data Management</h4>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Export Data</h5>
+                    <p>Download all platform data as CSV/Excel</p>
+                  </div>
+                  <button class="btn btn-secondary btn-sm">Export</button>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Backup Database</h5>
+                    <p>Create a backup of all data</p>
+                  </div>
+                  <button class="btn btn-secondary btn-sm">Backup Now</button>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Clear Cache</h5>
+                    <p>Clear cached data and regenerate</p>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="showNotification('Cache cleared successfully!', 'success')">Clear Cache</button>
+                </div>
+              </div>
+
+              <div class="danger-zone">
+                <h4>⚠️ Danger Zone</h4>
+                <p style="color: var(--gray-600); margin-bottom: 1rem;">These actions are irreversible. Please proceed with caution.</p>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Reset All Settings</h5>
+                    <p>Restore all settings to their default values</p>
+                  </div>
+                  <button class="btn btn-sm" style="background: var(--error); color: white;">Reset</button>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <h5>Delete All Data</h5>
+                    <p>Permanently delete all properties, users, and inquiries</p>
+                  </div>
+                  <button class="btn btn-sm" style="background: var(--error); color: white;">Delete All</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Tab switching
+    function showSettingsTab(tabName) {
+      // Remove active class from all tabs and panels
+      document.querySelectorAll('.settings-tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.settings-panel').forEach(panel => panel.classList.remove('active'));
+      
+      // Add active class to clicked tab and corresponding panel
+      document.querySelector(`[onclick="showSettingsTab('${tabName}')"]`).classList.add('active');
+      document.getElementById(`${tabName}-panel`).classList.add('active');
+    }
+  </script>
+</body>
+</html>
+

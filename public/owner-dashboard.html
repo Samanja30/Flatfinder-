@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Property Owner Dashboard - FlatFinders">
+  <title>Owner Dashboard - FlatFinders</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c9a66b' rx='15' width='100' height='100'/><path fill='white' d='M50 20L20 45v35h25V55h10v25h25V45L50 20z'/></svg>">
+  <style>
+    .property-thumb { width: 60px; height: 45px; object-fit: cover; border-radius: var(--radius-sm); }
+    .inquiry-card { display: flex; gap: 1rem; padding: 1rem; border-bottom: 1px solid var(--gray-200); }
+    .inquiry-card:last-child { border-bottom: none; }
+    .inquiry-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+    .inquiry-content { flex: 1; }
+    .inquiry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .inquiry-name { font-weight: 600; }
+    .inquiry-time { font-size: 0.8rem; color: var(--gray-500); }
+    .inquiry-message { font-size: 0.9rem; color: var(--gray-600); margin-bottom: 0.5rem; }
+    .inquiry-property { font-size: 0.85rem; color: var(--primary-gold); }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="dashboard-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9.5L12 3L21 9.5V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9.5Z" fill="currentColor"/>
+            <path d="M9 22V12H15V22" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="logo-text">FlatFinders</span>
+      </div>
+      
+      <nav class="dashboard-nav">
+        <div class="nav-section">
+          <span class="nav-section-title">Main</span>
+          <a href="owner-dashboard.html" class="dashboard-nav-link active">
+            <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Dashboard
+          </a>
+          <a href="owner-dashboard.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            My Properties
+          </a>
+          <a href="post-property.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+            Add Property
+          </a>
+          <a href="owner-inquiries.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            Inquiries
+            <span class="badge">5</span>
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <span class="nav-section-title">Account</span>
+          <a href="owner-profile.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            My Profile
+          </a>
+          <a href="owner-settings.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Settings
+          </a>
+          <a href="index.html" class="dashboard-nav-link">
+            <svg viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="dashboard-search">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" placeholder="Search your properties...">
+        </div>
+        
+        <div class="dashboard-user">
+          <div class="notifications">
+            <svg viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="badge"></span>
+          </div>
+          <div class="user-dropdown">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Owner" class="user-avatar">
+            <div class="user-info">
+              <h5>Abdul Rahman</h5>
+              <p>Property Owner</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="dashboard-content">
+        <h1 class="dashboard-title">Property Owner Dashboard</h1>
+        <p class="dashboard-subtitle">Manage your properties and track inquiries</p>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue">
+              <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>8</h4>
+              <p>Total Properties</p>
+              <span class="stat-change up">↑ 2 this month</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>6</h4>
+              <p>Active Listings</p>
+              <span class="stat-change up">75% of total</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon gold">
+              <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>23</h4>
+              <p>Total Inquiries</p>
+              <span class="stat-change up">↑ 5 this week</span>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon red">
+              <svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </div>
+            <div class="stat-content">
+              <h4>1,245</h4>
+              <p>Total Views</p>
+              <span class="stat-change up">↑ 156 this month</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <h4>Quick Actions</h4>
+          </div>
+          <div class="dashboard-card-body">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="post-property.html" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M12 4v16m8-8H4"/></svg>
+                Add New Property
+              </a>
+              <a href="owner-inquiries.html" class="btn btn-secondary">
+                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                View All Inquiries
+              </a>
+              <a href="properties.html" class="btn btn-secondary">
+                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                Browse Properties
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+          <!-- My Properties -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>My Properties</h4>
+              <a href="owner-dashboard.html" class="btn btn-sm btn-secondary">View All</a>
+            </div>
+            <div class="dashboard-card-body" style="padding: 0; overflow-x: auto;">
+              <table class="dashboard-table">
+                <thead>
+                  <tr>
+                    <th>Property</th>
+                    <th>Status</th>
+                    <th>Views</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="property-cell">
+                        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=100&q=80" alt="" class="property-thumb">
+                        <div>
+                          <strong>Modern Bachelor Flat</strong>
+                          <p style="font-size: 0.8rem; color: var(--gray-500);">Dhanmondi • ৳12,000</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge approved">Active</span></td>
+                    <td>245</td>
+                    <td>
+                      <div class="action-btns">
+                        <button class="action-btn edit" title="Edit"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                        <button class="action-btn delete" title="Delete"><svg viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="property-cell">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=100&q=80" alt="" class="property-thumb">
+                        <div>
+                          <strong>Spacious 2BHK</strong>
+                          <p style="font-size: 0.8rem; color: var(--gray-500);">Mirpur • ৳15,000</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge approved">Active</span></td>
+                    <td>189</td>
+                    <td>
+                      <div class="action-btns">
+                        <button class="action-btn edit" title="Edit"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                        <button class="action-btn delete" title="Delete"><svg viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="property-cell">
+                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=100&q=80" alt="" class="property-thumb">
+                        <div>
+                          <strong>Bachelor Room</strong>
+                          <p style="font-size: 0.8rem; color: var(--gray-500);">Bashundhara • ৳8,000</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge pending">Pending</span></td>
+                    <td>0</td>
+                    <td>
+                      <div class="action-btns">
+                        <button class="action-btn edit" title="Edit"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                        <button class="action-btn delete" title="Delete"><svg viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Recent Inquiries -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h4>Recent Inquiries</h4>
+              <a href="owner-inquiries.html" class="btn btn-sm btn-secondary">View All</a>
+            </div>
+            <div class="dashboard-card-body" style="padding: 0;">
+              <div class="inquiry-card">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Rafiq Ahmed" class="inquiry-avatar">
+                <div class="inquiry-content">
+                  <div class="inquiry-header">
+                    <span class="inquiry-name">Rafiq Ahmed</span>
+                    <span class="inquiry-time">2 hours ago</span>
+                  </div>
+                  <p class="inquiry-message">I'm interested in the Modern Bachelor Flat. Is it still available? Can I schedule a visit?</p>
+                  <span class="inquiry-property">Modern Bachelor Flat - Dhanmondi</span>
+                </div>
+              </div>
+              
+              <div class="inquiry-card">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Fatima Begum" class="inquiry-avatar">
+                <div class="inquiry-content">
+                  <div class="inquiry-header">
+                    <span class="inquiry-name">Fatima Begum</span>
+                    <span class="inquiry-time">5 hours ago</span>
+                  </div>
+                  <p class="inquiry-message">What's the advance payment required? Is the price negotiable?</p>
+                  <span class="inquiry-property">Spacious 2BHK - Mirpur</span>
+                </div>
+              </div>
+              
+              <div class="inquiry-card">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Kamal Hossain" class="inquiry-avatar">
+                <div class="inquiry-content">
+                  <div class="inquiry-header">
+                    <span class="inquiry-name">Kamal Hossain</span>
+                    <span class="inquiry-time">1 day ago</span>
+                  </div>
+                  <p class="inquiry-message">Is gas and water included in the rent? Looking for immediate move-in.</p>
+                  <span class="inquiry-property">Modern Bachelor Flat - Dhanmondi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance Chart -->
+        <div class="dashboard-card" style="margin-top: 1.5rem;">
+          <div class="dashboard-card-header">
+            <h4>Property Views (Last 30 Days)</h4>
+          </div>
+          <div class="dashboard-card-body">
+            <div class="chart-container">
+              <canvas id="propertiesChart" width="900" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+
